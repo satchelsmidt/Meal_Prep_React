@@ -1,9 +1,14 @@
 import React from 'react';
-import { Container, Dropdown, DropdownButton } from 'react-bootstrap'
-import SmallButton from '../SmallButton'
+import { Container, Dropdown } from 'react-bootstrap'
+import SmallButton from '../../SmallButton'
 
 
-export default function RecipeTypes() {
+export default function RecipeTypes(props) {
+
+    const saveAndSubmit = (e) => {
+        e.preventDefault()
+        props.nextStep()
+    }
 
     return (
         <Container style={styles.formContainer}>
@@ -32,34 +37,35 @@ export default function RecipeTypes() {
                     <SmallButton text="Italian"></SmallButton>
                 </Container>
             </Container>
+            <SmallButton text="Next" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
         </Container>
     );
 }
 
 const styles = {
     p: {
-        'text-align': 'center',
+        'textAlign': 'center',
         'color': 'white'
     },
     formContainer: {
         'display': 'flex',
-        'flex-direction': 'column',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'flexDirection': 'column',
+        'alignItems': 'center',
+        'justifyContent': 'center',
         'height': '400px'
     },
     innerContainer: {
         'display': 'flex',
-        'flex-direction': 'row',
-        'align-items': 'center',
-        'justify-content': 'space-between',
+        'flexDirection': 'row',
+        'alignItems': 'center',
+        'justifyContent': 'space-between',
         // 'height': '400px'
     },
     innerInnerContainer: {
         'display': 'flex',
-        'flex-direction': 'row',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'flexDirection': 'row',
+        'alignItems': 'center',
+        'justifyContent': 'center',
         'width': '50%',
         'margin': '0',
         'padding': '0'

@@ -1,15 +1,24 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button'
 
-export default function BigButton(props) {
+export default function SmallButton(props) {
+
+    // const saveAndSubmit = () =>{
+    //     console.log('clicked')
+    //     // e.preventDefault()
+    //     // props.nextStep()
+    // }
+
     return (
-    <Button variant="primary" size="sm" block style={styles.createButton}>{props.text}</Button>
+    <Button variant="primary" size="sm" block 
+    onClick={(e)=>props.onClick(e)}
+    style={styles.createButton}>{props.text}</Button>
     );
 }
 
 const styles ={
     createButton: {
-        'width': '30%',
-        'margin': '5px'
+        'width': '15%',
+        'margin': '15px'
     }
 }

@@ -9,6 +9,6 @@ export default function BigButton(props) {
 
 const styles ={
     createButton: {
-        'width': '30%'
+        'width': '100%'
     }
 }

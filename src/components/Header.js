@@ -1,5 +1,6 @@
 import React from 'react'
 import { Navbar, Nav, NavDropdown } from 'react-bootstrap'
+import { NavLink } from 'react-router-dom'
 
 export default function Header() {
     return (
@@ -8,8 +9,9 @@ export default function Header() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                    <Nav.Link href="#home">Home</Nav.Link>
+                    <Nav.Link href="/">Home</Nav.Link>
                     <Nav.Link href="#sample">View Sample Plan</Nav.Link>
+                    <Nav.Link href="#sample">View All Plans</Nav.Link>
                     <NavDropdown title="Account" id="basic-nav-dropdown">
                         <NavDropdown.Item href="#action/3.1">Login</NavDropdown.Item>
                         <NavDropdown.Item href="#action/3.2">Sign Up</NavDropdown.Item>
@@ -24,6 +26,6 @@ export default function Header() {
 
 const styles = {
     navbar: {
-        'margin-top': '5%'
+        'marginTop': '5%'
     }
 }

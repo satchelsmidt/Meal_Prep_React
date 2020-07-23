@@ -1,15 +1,22 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
-import PageContent from './components/content/PageContent'
+import Main from './components/pages/Main'
+import CreatePlan from './components/pages/CreatePlan/00_CreatePlan'
+import AddRecipes from './components/pages/AddRecipes'
+import Plan from './components/pages/Plan'
+import { BrowserRouter, Route } from 'react-router-dom'
 
 export default function App() {
   return (
-    <Container>
-      <div className="App">
+    <BrowserRouter>
+      <Container>
         <Header></Header>
-        <PageContent></PageContent>
-      </div>
-    </Container>
+        <Route exact path='/' component={Main}></Route>
+        <Route path='/create' component={CreatePlan}></Route>
+        <Route path='/add' component={AddRecipes}></Route>
+        <Route path='/plan' component={Plan}></Route>
+      </Container>
+    </BrowserRouter>
   );
 }
