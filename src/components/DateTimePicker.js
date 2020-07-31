@@ -9,42 +9,43 @@ export default function DateTimePicker(props) {
 
     let currentTimeBlocks = props.planTimes[props.step]
 
-    //detect which step user is on, based on that, render unique components for time ranges
+    // let timeStep = 0
 
-    // const planTimes = () => {
-    //     switch (props.step) {
-    //         case 0:
-    //             return <TimeRange />
-    //         case 1:
-    //             return <TimeRange />
+    // const addTimeBox = () => {
+    //     // console.log('time before add: ', timeStep)
+    //     // timeStep += 1
+    //     // console.log('time after add: ', timeStep)
 
-    //         case 2:
-    //             return <TimeRange />
-
-    //         case 3:
-    //             return <TimeRange />
-
-    //         case 4:
-    //             return <TimeRange />
-
-    //         case 5:
-    //             return <TimeRange />
-
-    //         case 6:
-    //             return <TimeRange />
-
-    //     }
+    //     console.log('current day: ', props.step)
+    //     props.updateTimeBoxes(props.step, null, null)
     // }
 
     const addTimeBox = () => {
-        console.log('clicked')
-        console.log('the tep: ', props.step)
-        props.updateTimeBoxes(props.step)
+        // console.log('time before add: ', timeStep)
+        // timeStep += 1
+        // console.log('time after add: ', timeStep)
+
+        console.log('current day: ', props.step)
+        props.addTimeBox(props.step)
     }
 
-    const mapTimes = currentTimeBlocks.map(() => {
-        console.log('our times: ', currentTimeBlocks)
-        return (<TimeRange />)
+
+    // const renderTimeBlocks = (timestep) => {
+    //     for (let timeBlock of currentTimeBlocks) {
+    //         return (<TimeRange startTime={currentTimeBlocks[timestep][0]} endTime={currentTimeBlocks[timestep][1]}/>)
+    //     }
+    // }
+
+    const mapTimes = currentTimeBlocks.map((value, timeIndex) => {
+        // console.log('All plan times: ', props.planTimes)
+        // console.log('The list of times for the current day: ', currentTimeBlocks)
+        // console.log('current pair of times: ', value)
+        // console.log('timeIndex: ', timeIndex)
+        // console.log('start time of current timeIndex: ', currentTimeBlocks[timeIndex][0])
+        // console.log('end timeof our current timeIndex: ', currentTimeBlocks[timeIndex][1])
+        return (<TimeRange startTime={currentTimeBlocks[timeIndex][0]} endTime={currentTimeBlocks[timeIndex][1]} dayIndex={props.step} timeIndex={timeIndex} planTimes={props.planTimes} 
+            updateTimeBoxes={props.updateTimeBoxes} 
+            />)
     })
 
     return (
@@ -74,6 +75,7 @@ export default function DateTimePicker(props) {
             </Container>
             {/* {planTimes()} */}
             {mapTimes}
+            {/* {renderTimeBlocks(timeStep)} */}
             <Button style={styles.iconButton} variant="link" onClick={() => addTimeBox()}>
                 <h5>+</h5>
             </Button>

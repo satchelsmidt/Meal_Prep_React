@@ -7,6 +7,8 @@ import DateTimePicker from '../../DateTimePicker'
 export default function PlanTimes(props) {
 
     let [step, setStep] = useState(0)
+    // let currentTimeBlocks = props.planTimes[step]
+
 
     const nextStep = () => {
         setStep(step = step + 1)
@@ -16,6 +18,17 @@ export default function PlanTimes(props) {
         setStep(step = step - 1)
     }
 
+    // const addTimeBox = () => {
+    //     props.updateTimeBoxes(step)
+    // }
+
+    // const mapTimes = currentTimeBlocks.map(() => {
+    //     console.log('FUNCTION RUN', currentTimeBlocks)
+    //     console.log('updated plans in total: ', props.planTimes)
+    //     console.log('whatever our default start time is: ', currentTimeBlocks[0][0])
+    //     console.log('whatever our default end time is (should be same as start): ', currentTimeBlocks[0][1])
+    //     return (<TimeRange startTime={currentTimeBlocks[0][0]} endTime={currentTimeBlocks[0][1]} />)
+    // })
 
     // const [startDate, setStartDate] = useState(new Date());
 
@@ -48,66 +61,91 @@ export default function PlanTimes(props) {
                     nextStep={() => nextStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
             case 1:
                 return <DateTimePicker
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
-
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
+
             case 2:
                 return <DateTimePicker
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
             case 3:
                 return <DateTimePicker
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
             case 4:
                 return <DateTimePicker
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
             case 5:
+
                 return <DateTimePicker
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}
                 />
+
             case 6:
+
                 return <DateTimePicker
                     prevStep={() => prevStep()}
                     date={props.planDates[step]}
                     planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
+                    updateTimeBoxes={props.updateTimeBoxes}
+                    step={step}
+                // handleChange={(date) => handleInputChange(date)}
+                />
+            default:
+                return <DateTimePicker
+                    nextStep={() => nextStep()}
+                    date={props.planDates[step]}
+                    planTimes={props.planTimes}
+                    addTimeBox={props.addTimeBox}
                     updateTimeBoxes={props.updateTimeBoxes}
                     step={step}
                 // handleChange={(date) => handleInputChange(date)}

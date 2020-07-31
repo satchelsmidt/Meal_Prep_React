@@ -12,13 +12,12 @@ export default function CreatePlan() {
     const [startDate, setStartDate] = useState(new Date())
     const [planDates, setPlanDates] = useState([])
     const [planTimes, setPlanTimes] = useState([])
-    const [planCuisines, setPlanCuisines] = useState([])
-    const [planRestrictions, setPlanRestrictions] = useState([])
+    // const [planCuisines, setPlanCuisines] = useState([])
+    // const [planRestrictions, setPlanRestrictions] = useState([])
 
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
         if (step === 1) {
-            // TODO: do this in seperate module
             //initialize start and end of plan
             let start = moment(startDate, 'YYYY-MM-DD')
             let end = moment(start).add(7, 'days')
@@ -34,7 +33,7 @@ export default function CreatePlan() {
                 start = newDate
 
                 //add to our plan times array as well (populate with empty time blocks)
-                planTimesCopy.push([[1]])
+                planTimesCopy.push([[new Date(), new Date()]])
             }
 
             //set state of plan dates to our new arr
@@ -52,44 +51,62 @@ export default function CreatePlan() {
     const handleInputChange = async (date) => {
         //set our startDate on the appropriate step
         if (step === 1) {
-            console.log('our date: ', date)
+            console.log('selected date: ', date)
             setStartDate(date)
         }
     }
 
-    const updateTimeBoxes = async (step) => {
-        console.log('did this pass correctly: ', step)
-        
+    const addTimeBox = async (dayStep) => {
+        console.log('SHOULD RUN WHEN UPDATING TIME BOX')
+        console.log('Day of time to update: ', dayStep)
         //shallow copy of times
         let timesCopy = [...planTimes]
         //shallow copy of item to mutate
-        let time = timesCopy[step]
-
-        console.log('this is our TIMES ARRAY: ', timesCopy)
-        console.log('this is our thing (should be 1): ', time)
+        let time = timesCopy[dayStep]
 
         //add value
-        time.push([1])
+        time.push([new Date(), new Date()])
 
         //put timeslot back into original array
-        timesCopy[step] = time
+        timesCopy[dayStep] = time
 
         //modify state of time array
         await setPlanTimes(timesCopy)
 
-        console.log('modified array:', planTimes)
+        console.log('TIME ARRAY (new box added):', planTimes)
 
-        // console.log('reached (part 2)')
-        // let newTime = new Date()
-        // console.log('this is the current time (prob 1): ', planTimes[step])
+    }
+
+    const updateTimeBoxes = async (dayStep, timeStep, date, place) => {
+        
+        console.log('TIMPIKCER UDPATESD')
+        console.log('This is the DAY of the box we updating: ', dayStep)
+        console.log('This is the TIME of the box we updating: ', timeStep)
+        console.log('This is the NEW TIMEDAY: ', date)
+        console.log('this is the PLACE of the time box we updating: ', place)
 
 
-        // setPlanTimes([...planTimes[step]].concat(newTime))
+        //shallow copy of times
+        let timesCopy = [...planTimes]
+        //shallow copy of item to mutate
+        let time = timesCopy[dayStep][timeStep][place]
+
+        //add value
+        time = date
+
+        //put timeslot back into original array
+        timesCopy[dayStep][timeStep][place] = time
+
+        //modify state of time array
+        await setPlanTimes(timesCopy)
+
+        console.log('modified times array:', planTimes)
     }
 
     useEffect(() => {
-        console.log('maybe not async: ', startDate)
-        console.log('maybe not async: ', planDates)
+        console.log('beginning date of our plan (stored): ', startDate)
+        console.log('list of days for our plan (stored): ', planDates)
+        console.log('list of TIMES for our plan (stored): ', planTimes)
         console.log('current step: ', step)
     })
 
@@ -106,7 +123,8 @@ export default function CreatePlan() {
                     startDate={startDate}
                     planDates={planDates}
                     planTimes={planTimes}
-                    updateTimeBoxes={(step) => updateTimeBoxes(step)}
+                    addTimeBox={addTimeBox}
+                    updateTimeBoxes={(dayStep, timeStep, date, place) => updateTimeBoxes(dayStep, timeStep, date, place)}
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     handleChange={(dates) => handleInputChange(dates)}
@@ -125,6 +143,11 @@ export default function CreatePlan() {
                 />
             case 5:
                 return <p>What the heck</p>
+            default:
+                return <PlanStart
+                    nextStep={() => nextStep()}
+                    // handleChange={(date) => setPlanDate(planDates.push(date))}
+                    handleChange={(date) => handleInputChange(date)}/>
         }
     }
 
