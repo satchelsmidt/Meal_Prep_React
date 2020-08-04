@@ -1,40 +1,66 @@
 import React from 'react';
 import { Container, Dropdown } from 'react-bootstrap'
-import SmallButton from '../../SmallButton'
+import SmallButton from '../../components/SmallButton'
+import * as Cuisines from '../../config/cuisines.json'
 
-export default function RecipeRestrictions(props) {
+
+export default function RecipeTypes(props) {
 
     const saveAndSubmit = (e) => {
         e.preventDefault()
         props.nextStep()
     }
 
+    const renderCuisinesDropdown = () => {
+        return Cuisines.cuisines.map((cuisine) => {
+            return <Dropdown.Item onClick={() => selectCuisines(cuisine)}>{cuisine}</Dropdown.Item>
+        })
+    }
+
+    const selectCuisines = (cuisine) => {
+        if(props.cuisines.indexOf(cuisine)<0){
+            console.log('CUISINE IN FUNCTION: ', cuisine)
+            props.addNewCuisine(cuisine)
+        }
+        else{
+            console.log("CUISINE ALREADY IN ARRAY")
+        }
+    }
+
+    const renderCuisineButtons = () => {
+        return props.cuisines.map((cuisine)=>{
+            return <SmallButton text={cuisine}></SmallButton>
+        })
+    }
+
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>Select the dietary restrictions you'd like your plan to follow:</p>
+            <p style={styles.p}>First, lets pick the recipes you'd like to cook throughout the week.</p>
+            <p style={styles.p}>Select the types of cuisine you'd like to search:</p>
             <Container style={styles.innerContainer}>
                 <Container style={styles.innerInnerContainer}>
                     <Dropdown >
                         <Dropdown.Toggle variant="success" id="dropdown-basic"
                             style={styles.dropdown}
                         >
-                            Restrictions
+                            Cuisines
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">None</Dropdown.Item>
+                            <Dropdown.Item href="#/action-1">Surprise Me!</Dropdown.Item>
                             <Dropdown.Divider />
                             {/* Replace these with auto render of each cuisine in cuisines arr */}
-                            <Dropdown.Item href="#/action-2">Vegan</Dropdown.Item>
-                            <Dropdown.Item href="#/action-3">Gluten Free</Dropdown.Item>
+                            {renderCuisinesDropdown()}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Container>
                 <Container style={styles.innerInnerContainer}>
-                    <SmallButton text="Vegetarian"></SmallButton>
-                    <SmallButton text="Wheat Allergy"></SmallButton>
-                    <SmallButton text="Fish"></SmallButton>
+                    {renderCuisineButtons()}
+                    {/* <SmallButton text="Italian"></SmallButton>
+                    <SmallButton text="Italian"></SmallButton>
+                    <SmallButton text="Italian"></SmallButton> */}
                 </Container>
             </Container>
+            <SmallButton text="Back" onClick={() => { props.prevStep() }}></SmallButton>
             <SmallButton text="Next" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
         </Container>
     );
@@ -57,7 +83,6 @@ const styles = {
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'space-between',
-        // 'height': '400px'
     },
     innerInnerContainer: {
         'display': 'flex',

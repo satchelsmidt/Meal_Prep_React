@@ -2,17 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
-// import moment from 'moment';
 
 export default function TimeRange(props) {
 
     const [startTime, setStartTime] = useState(props.startTime)
     const [endTime, setEndTime] = useState(props.endTime)
-    // const [startTime, setStartTime] = useState(props.planTimes[props.dayIndex][props.timeIndex][0])
-    // const [endTime, setEndTime] = useState(props.planTimes[props.dayIndex][props.timeIndex][1])
-    
-    //grab list of all times
-    console.log('All times of plan (WHEN TIMEPICKER LOADS): ', props.planTimes) 
 
     const changeStartTime = (date) => {
         props.updateTimeBoxes(props.dayIndex, props.timeIndex, date, 0)
@@ -60,6 +54,5 @@ const styles = {
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'center',
-        // 'height': '400px'
     },
 }

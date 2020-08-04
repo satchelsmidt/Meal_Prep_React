@@ -1,11 +1,11 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
 
-export default function AddRecipes() {
+export default function AllPlans() {
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>This is where you will search for and add recipes to your plan</p>
+            <p style={styles.p}>This is where you will view ALL RECIPE PLANS for user</p>
         </Container>
     );
 }

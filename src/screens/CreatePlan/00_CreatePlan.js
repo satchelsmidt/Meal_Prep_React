@@ -5,6 +5,7 @@ import PlanTimes from './02_PlanTimes'
 import RecipeTypes from './03_RecipeTypes'
 import RecipeRestrictions from './04_RecipeRestrictions'
 import moment from 'moment';
+import AddRecipes from './05_AddRecipes'
 
 export default function CreatePlan() {
 
@@ -12,8 +13,10 @@ export default function CreatePlan() {
     const [startDate, setStartDate] = useState(new Date())
     const [planDates, setPlanDates] = useState([])
     const [planTimes, setPlanTimes] = useState([])
-    // const [planCuisines, setPlanCuisines] = useState([])
-    // const [planRestrictions, setPlanRestrictions] = useState([])
+    const [planCuisines, setPlanCuisines] = useState([])
+    const [planIntolerances, setPlanIntolerances] = useState([])
+    const [planDiets, setPlanDiets] = useState([])
+
 
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
@@ -51,20 +54,17 @@ export default function CreatePlan() {
     const handleInputChange = async (date) => {
         //set our startDate on the appropriate step
         if (step === 1) {
-            console.log('selected date: ', date)
             setStartDate(date)
         }
     }
 
     const addTimeBox = async (dayStep) => {
-        console.log('SHOULD RUN WHEN UPDATING TIME BOX')
-        console.log('Day of time to update: ', dayStep)
         //shallow copy of times
         let timesCopy = [...planTimes]
         //shallow copy of item to mutate
         let time = timesCopy[dayStep]
 
-        //add value
+        //add default value
         time.push([new Date(), new Date()])
 
         //put timeslot back into original array
@@ -72,26 +72,16 @@ export default function CreatePlan() {
 
         //modify state of time array
         await setPlanTimes(timesCopy)
-
-        console.log('TIME ARRAY (new box added):', planTimes)
-
     }
 
     const updateTimeBoxes = async (dayStep, timeStep, date, place) => {
-        
-        console.log('TIMPIKCER UDPATESD')
-        console.log('This is the DAY of the box we updating: ', dayStep)
-        console.log('This is the TIME of the box we updating: ', timeStep)
-        console.log('This is the NEW TIMEDAY: ', date)
-        console.log('this is the PLACE of the time box we updating: ', place)
-
 
         //shallow copy of times
         let timesCopy = [...planTimes]
         //shallow copy of item to mutate
         let time = timesCopy[dayStep][timeStep][place]
 
-        //add value
+        //add new value
         time = date
 
         //put timeslot back into original array
@@ -99,8 +89,39 @@ export default function CreatePlan() {
 
         //modify state of time array
         await setPlanTimes(timesCopy)
+    }
 
-        console.log('modified times array:', planTimes)
+    const addNewCuisine = async (cuisine) => {
+        //shallow copy of cuisines
+        let cuisinesCopy = [...planCuisines]
+
+        //add cuisine to copy
+        cuisinesCopy.push(cuisine)
+
+        //modify state of cuisines arr
+        await setPlanCuisines(cuisinesCopy)
+    }
+
+    const addNewIntolerance = async (intolerance) => {
+        //shallow copy of restrictions
+        let intolerancesCopy = [...planIntolerances]
+
+        //add restriction to copy
+        intolerancesCopy.push(intolerance)
+
+        //modify state of restrictions arr
+        await setPlanIntolerances(intolerancesCopy)
+    }
+
+    const addNewDiet = async (diet) => {
+        //shallow copy of restrictions
+        let dietsCopy = [...planDiets]
+
+        //add restriction to copy
+        dietsCopy.push(diet)
+
+        //modify state of restrictions arr
+        await setPlanDiets(dietsCopy)
     }
 
     useEffect(() => {
@@ -108,6 +129,9 @@ export default function CreatePlan() {
         console.log('list of days for our plan (stored): ', planDates)
         console.log('list of TIMES for our plan (stored): ', planTimes)
         console.log('current step: ', step)
+        console.log('OUR CUISINES (MOST RECENT): ', planCuisines)
+        console.log('OUR Intoleranecs (MOST RECENT): ', planIntolerances)
+        console.log('OUR Diets (MOST RECENT): ', planDiets)
     })
 
     const formSteps = () => {
@@ -115,7 +139,6 @@ export default function CreatePlan() {
             case 1:
                 return <PlanStart
                     nextStep={() => nextStep()}
-                    // handleChange={(date) => setPlanDate(planDates.push(date))}
                     handleChange={(date) => handleInputChange(date)}
                 />
             case 2:
@@ -131,26 +154,36 @@ export default function CreatePlan() {
                 />
             case 3:
                 return <RecipeTypes
+                    cuisines={planCuisines}
+                    addNewCuisine={(cuisine) => addNewCuisine(cuisine)}
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     handleChange={() => handleInputChange()}
                 />
             case 4:
                 return <RecipeRestrictions
+                    diets={planDiets}
+                    intolerances={planIntolerances}
+                    addNewIntolerance={(intolerance) => addNewIntolerance(intolerance)}
+                    addNewDiet={(diet) => addNewDiet(diet)}
                     nextStep={() => nextStep()}
                     prevStep={() => prevStep()}
                     handleChange={() => handleInputChange()}
                 />
             case 5:
-                return <p>What the heck</p>
+                return <AddRecipes
+                    cuisines={planCuisines}
+                    intolerances={planIntolerances}
+                    diets={planDiets}
+                    prevStep={() => prevStep()}
+                    handleChange={() => handleInputChange()}
+                />
             default:
                 return <PlanStart
                     nextStep={() => nextStep()}
-                    // handleChange={(date) => setPlanDate(planDates.push(date))}
-                    handleChange={(date) => handleInputChange(date)}/>
+                    handleChange={(date) => handleInputChange(date)} />
         }
     }
-
 
 
     return (
@@ -169,7 +202,8 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px',
-        'marginBottom': '200px'
+        'height': 'auto',
+        'marginBottom': '200px',
+        'overflow': 'auto'
     }
 }

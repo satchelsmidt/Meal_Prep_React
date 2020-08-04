@@ -1,6 +1,6 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
-import BigButton from '../BigButton'
+import BigButton from '../components/BigButton'
 import { NavLink } from 'react-router-dom'
 
 

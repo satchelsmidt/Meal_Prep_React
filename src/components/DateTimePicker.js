@@ -9,43 +9,14 @@ export default function DateTimePicker(props) {
 
     let currentTimeBlocks = props.planTimes[props.step]
 
-    // let timeStep = 0
-
-    // const addTimeBox = () => {
-    //     // console.log('time before add: ', timeStep)
-    //     // timeStep += 1
-    //     // console.log('time after add: ', timeStep)
-
-    //     console.log('current day: ', props.step)
-    //     props.updateTimeBoxes(props.step, null, null)
-    // }
-
     const addTimeBox = () => {
-        // console.log('time before add: ', timeStep)
-        // timeStep += 1
-        // console.log('time after add: ', timeStep)
-
-        console.log('current day: ', props.step)
         props.addTimeBox(props.step)
     }
 
-
-    // const renderTimeBlocks = (timestep) => {
-    //     for (let timeBlock of currentTimeBlocks) {
-    //         return (<TimeRange startTime={currentTimeBlocks[timestep][0]} endTime={currentTimeBlocks[timestep][1]}/>)
-    //     }
-    // }
-
     const mapTimes = currentTimeBlocks.map((value, timeIndex) => {
-        // console.log('All plan times: ', props.planTimes)
-        // console.log('The list of times for the current day: ', currentTimeBlocks)
-        // console.log('current pair of times: ', value)
-        // console.log('timeIndex: ', timeIndex)
-        // console.log('start time of current timeIndex: ', currentTimeBlocks[timeIndex][0])
-        // console.log('end timeof our current timeIndex: ', currentTimeBlocks[timeIndex][1])
-        return (<TimeRange startTime={currentTimeBlocks[timeIndex][0]} endTime={currentTimeBlocks[timeIndex][1]} dayIndex={props.step} timeIndex={timeIndex} planTimes={props.planTimes} 
-            updateTimeBoxes={props.updateTimeBoxes} 
-            />)
+        return (<TimeRange startTime={currentTimeBlocks[timeIndex][0]} endTime={currentTimeBlocks[timeIndex][1]} dayIndex={props.step} timeIndex={timeIndex} planTimes={props.planTimes}
+            updateTimeBoxes={props.updateTimeBoxes}
+        />)
     })
 
     return (
@@ -58,7 +29,7 @@ export default function DateTimePicker(props) {
 
                 ) : (
                         <Button style={styles.iconButton} variant="link">
-                            <ArrowLeftSquareFill style={styles.iconLeft} onClick={props.prevStep} />
+                            <ArrowLeftSquareFill style={styles.iconLeft} onClick={props.prevDayStep} />
                         </Button>
                     )}
                 <p style={styles.pNoBottom}>{moment(props.date).format('dddd,  LL')}</p>
@@ -73,9 +44,7 @@ export default function DateTimePicker(props) {
                         </Button>
                     )}
             </Container>
-            {/* {planTimes()} */}
             {mapTimes}
-            {/* {renderTimeBlocks(timeStep)} */}
             <Button style={styles.iconButton} variant="link" onClick={() => addTimeBox()}>
                 <h5>+</h5>
             </Button>
