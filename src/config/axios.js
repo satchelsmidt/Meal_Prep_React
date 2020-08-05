@@ -6,13 +6,6 @@ export const axiosFoodInstance = axios.create({
     });
 
 export const axiosAuthInstance = axios.create({
-        baseURL: "http://localhost:3000",
+        baseURL: "http://localhost:8080/api/auth",
         timeout: 50000,
     });
-
-// export default axiosInstance;
-
-// module.exports = {
-//     axiosFoodInstance: axiosFoodInstance,
-//     axiosAuthInstance: axiosAuthInstance
-// }

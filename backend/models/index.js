@@ -18,7 +18,8 @@ const db = {};
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
 
-//use plan model
+//use data models
 db.plans = require("./plan")(sequelize, Sequelize)
+db.users = require("./user")(sequelize, Sequelize)
 
 module.exports = db;

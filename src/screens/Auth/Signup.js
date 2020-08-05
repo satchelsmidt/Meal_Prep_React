@@ -31,7 +31,7 @@ export default function Signup() {
     return (
         <Container className="Login" style={styles.formContainer}>
             <Form onSubmit={handleSubmit}>
-                <Form.Group controlId="email" bsSize="large">
+                <Form.Group controlId="email" bssize="large">
                     <Form.Label>Email</Form.Label>
                     <Form.Control
                         autoFocus
@@ -40,7 +40,7 @@ export default function Signup() {
                         onChange={e => setEmail(e.target.value)}
                     />
                 </Form.Group>
-                <Form.Group controlId="password" bsSize="large">
+                <Form.Group bssize="large">
                     <Form.Label>Password</Form.Label>
                     <Form.Control
                         value={password}
@@ -54,7 +54,7 @@ export default function Signup() {
                         type="password"
                     />
                 </Form.Group>
-                <Button block bsSize="large" disabled={!validateForm()} type="submit">
+                <Button block bssize="large" disabled={!validateForm()} type="submit">
                     Login
         </Button>
             </Form>

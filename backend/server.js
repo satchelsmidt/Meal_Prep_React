@@ -26,6 +26,7 @@ db.sequelize.sync({force: true}).then(()=>{
 
 //Require api routes
 require("./routes/planRoutes")(app)
+require("./routes/authRoutes")(app)
 
 //initialize PORT var, set app listener
 const PORT = process.env.PORT || 8080;
