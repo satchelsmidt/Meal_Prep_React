@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Container } from 'react-bootstrap'
 import Header from './components/Header'
 import Main from './screens/Main'
@@ -10,8 +10,19 @@ import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
 import Password from './screens/Auth/ForgotPassword'
 import { BrowserRouter, Route, Redirect } from 'react-router-dom'
+import { checkSession } from './api/authentication'
 
 export default function App() {
+
+  const [validUser, setValidUser] = useState(null)
+  
+  useEffect(()=>{
+    checkSession().then((res)=>{
+      console.log('the state of our user: ', validUser)
+      console.log('this is it:', res)
+    })
+  })
+
   return (
     <BrowserRouter>
       <Container>

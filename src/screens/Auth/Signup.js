@@ -24,6 +24,12 @@ export default function Signup() {
 
         event.preventDefault();
         signup(email, password).then((res) => {
+            if (!res.success) {
+                alert('Login has failed. Recheck your credentials');
+                //TODO:Prevent user from accessing other pages (return from function)
+            }
+
+            //TODO: route user to create plan page
             console.log('the response: ', res)
         })
     }
