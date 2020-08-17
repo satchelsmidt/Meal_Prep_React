@@ -4,22 +4,21 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 
 // Configuring Passport
-// const passport = require("./config/passport")
-// var session = require('express-session');
+const passport = require("./config/passport")
+var session = require('express-session');
+const SessionStore = require('express-session-sequelize')(session.Store);
+// const flash = require('connect-flash');
+
 
 
 
 //initialize app w/ express
 const app = express();
 
-// app.use(session({
-//     secret: 'mySecretKey',
-//     resave: false,
-//     saveUninitialized: false
-// }));
 
-// app.use(passport.initialize());
-// app.use(passport.session());
+
+app.use(passport.initialize());
+app.use(passport.session());
 
 
 
@@ -30,6 +29,8 @@ app.use(cors());
 //enable request parsing for app/json and app/x-www-form-urlencoded requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+
+// app.use(flash());
 
 
 // app.use((req, res, next) => {
@@ -47,15 +48,26 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // })
 
 //create basic route
-app.get('/', (req, res) => {
-    res.json({ message: "welcome to application" })
-});
+// app.get('/', (req, res) => {
+//     res.json({ message: "welcome to application" })
+// });
 
 //use Sequelize db
 const db = require("./models");
 db.sequelize.sync({ force: true }).then(() => {
     console.log('dropped and synced db')
 });
+
+const sequelizeSessionStore = new SessionStore({
+    db: db.sequelize
+})
+
+app.use(session({
+    secret: 'mySecretKey',
+    resave: false,
+    saveUninitialized: false,
+    store: sequelizeSessionStore
+}));
 
 //Require api routes
 require("./routes/planRoutes")(app)

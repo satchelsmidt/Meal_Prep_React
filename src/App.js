@@ -18,8 +18,9 @@ export default function App() {
   
   useEffect(()=>{
     checkSession().then((res)=>{
-      console.log('the state of our user: ', validUser)
-      console.log('this is it:', res)
+      console.log('session has been checked')
+      // console.log('the state of our user: ', validUser)
+      // console.log('this is it:', res)
     })
   })
 

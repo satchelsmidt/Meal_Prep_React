@@ -3,14 +3,16 @@ const User = db.users;
 
 //user login route 
 exports.login = (req, res) => {
-    res.send(req.body)
     console.log('The login Request therein: ', req)
+
+    console.log('WE DID IT!')
+    res.send(req.body)
 };
 
 //user signup route
 exports.signup = (req, res) => {
     const user = {
-        username: req.body.params.email,
+        username: req.body.params.username,
         password: req.body.params.password
     }
 
@@ -22,7 +24,6 @@ exports.signup = (req, res) => {
         });
     });
 };
-
 
 exports.allUsers = (req, res) => {
     User.findAll().then((data) => {
