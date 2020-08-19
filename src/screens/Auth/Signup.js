@@ -9,23 +9,21 @@ export default function Signup() {
     const [passwordValid, setPasswordValid] = useState("");
 
     const validateForm = () => {
-
         return (email.length > 0 && password.length > 0);
     }
 
     const handleSubmit = (event) => {
+        event.preventDefault();
         if (password !== passwordValid) {
-            event.preventDefault();
             alert('passwords must match');
             setPassword("")
             setPasswordValid("")
             return false;
         }
 
-        event.preventDefault();
         signup(email, password).then((res) => {
             if (!res.success) {
-                alert('Login has failed. Recheck your credentials');
+                alert('Signup has failed. Recheck your credentials');
                 //TODO:Prevent user from accessing other pages (return from function)
             }
 
