@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Button, Form, Container, Alert } from "react-bootstrap";
+import { Redirect } from 'react-router-dom';
 import { login } from '../../api/authentication'
+import { AuthContext } from '../../AuthContext'
 
 export default function Login() {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+
+    const auth = useContext(AuthContext)
 
     const validateForm = () => {
         return email.length > 0 && password.length > 0;
@@ -14,7 +18,15 @@ export default function Login() {
     const handleSubmit = (event) => {
         event.preventDefault();
         login(email, password).then((res) => {
-            console.log('the response: ', res)
+            if (!res.success) {
+                console.log('something went horribly wrong')
+            }
+            else {
+                console.log('User Successfully Logged in.')
+                auth.setLogin()
+
+                // return <Redirect to="/home" />
+            }
         })
     }
 
@@ -40,7 +52,7 @@ export default function Login() {
                 </Form.Group>
                 <Button block bssize="large" disabled={!validateForm()} type="submit">
                     Login
-        </Button>
+                    </Button>
             </Form>
         </Container>
     );
