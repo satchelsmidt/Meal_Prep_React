@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
+const flash = require(`connect-flash`);
 
 // Configure Passport
 const passport = require("./config/passport")
@@ -42,6 +43,7 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(flash())
 
 app.get('/signup', function(req, res, next) {
     console.log('a simple req:', req.user)

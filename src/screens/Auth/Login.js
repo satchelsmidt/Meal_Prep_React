@@ -4,8 +4,11 @@ import { Redirect } from 'react-router-dom';
 import { login } from '../../api/authentication'
 import { AuthContext } from '../../AuthContext'
 
-export default function Login() {
+export default function Login(props) {
 
+    const from = props.location.state || { from: { pathname: '/' } }
+
+    const [redirectToReferrer, setRedirectToReferrer] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -17,17 +20,21 @@ export default function Login() {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        login(email, password).then((res) => {
+        login(email, password).then(async (res) => {
             if (!res.success) {
                 console.log('something went horribly wrong')
             }
             else {
                 console.log('User Successfully Logged in.')
-                auth.setLogin()
-
-                // return <Redirect to="/home" />
+                await auth.setLogin()
+                setRedirectToReferrer(true)
+                // auth.setUser()
             }
         })
+    }
+
+    if (redirectToReferrer) {
+        return <Redirect to={from} />;
     }
 
     return (

@@ -9,15 +9,15 @@ import AllPlans from './screens/AllPlans'
 import Login from './screens/Auth/Login'
 import Signup from './screens/Auth/Signup'
 import Password from './screens/Auth/ForgotPassword'
-import { BrowserRouter, Route, Redirect, Switch, useHistory } from 'react-router-dom'
+import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { checkSession } from './api/authentication'
 import { AuthContext } from './AuthContext'
-import PrivateRoute from './PrivateRoute'
+import { PrivateRoute } from './PrivateRoute'
 
 export default function App() {
 
-  let history = useHistory()
   const [loggedIn, setLoggedIn] = useState(false)
+  // const [user, setUser] = useState(null)
 
   useEffect(() => {
     console.log('logged in state (Main): ', loggedIn)
@@ -34,9 +34,7 @@ export default function App() {
       setLoggedIn(true)
     }
     else {
-
       setLoggedIn(false)
-      history.push("/login")
     }
   }
 
@@ -45,47 +43,22 @@ export default function App() {
       <BrowserRouter>
         <Container>
           <Header></Header>
-          {/* PUBLIC  */}
-          <Route exact path='/login' component={Login}></Route>
-          {/* PUBLIC  */}
-          <Route exact path='/signup' component={Signup}></Route>
-          {/* PUBLIC  */}
-
           <Switch>
-            <Route exact path="/">
-              {/* PROTECTED  */}
-              <Redirect to='/home' />
-            </Route>
-            {/* PROTECTED  */}
-            <PrivateRoute exact path='/home' component={Main}>
+            {/* PUBLIC ROUTES*/}
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+            <Route path='/password' component={Password} />
+            <Route path='/sample' component={SamplePlan} />
 
-            </PrivateRoute>
-            {/* PROTECTED  */}
-            <PrivateRoute exact path='/sample' component={SamplePlan}>
-
-            </PrivateRoute>
-            {/* PROTECTED  */}
-            <PrivateRoute exact path='/all' component={AllPlans}>
-
-            </PrivateRoute>
-
-            <PrivateRoute exact path='/password' component={Password}>
-
-            </PrivateRoute>
-            {/* PROTECTED  */}
-            <PrivateRoute exact path='/create' component={CreatePlan}>
-              <CreatePlan></CreatePlan>
-            </PrivateRoute>
-            {/* PROTECTED  */}
-            <PrivateRoute exact path='/plan' component={SinglePlan}>
-
-            </PrivateRoute>
+            {/* PROTECTED  ROUTES*/}
+            <PrivateRoute exact path='/' component={Main} />
+            <PrivateRoute path='/all' component={AllPlans} />
+            <PrivateRoute path='/create' component={CreatePlan} />
+            <PrivateRoute path='/plan' component={SinglePlan} />
           </Switch>
-
         </Container>
       </BrowserRouter>
     </AuthContext.Provider>
   );
-
 }
 

@@ -11,30 +11,20 @@ export default function Header() {
     if (auth.loggedIn) {
         return (
             <Navbar bg="light" expand="lg" className='navbar' style={styles.navbar}>
-                <LinkContainer to="/home">
+                <LinkContainer to="/">
                     <Navbar.Brand>Preppy</Navbar.Brand>
                 </LinkContainer >
 
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ml-auto">
-                        {/* PROTECTED  */}
-                        <LinkContainer to="/home">
+                        <LinkContainer to="/">
                             <Nav.Link>Create Plan</Nav.Link>
                         </LinkContainer >
                         <LinkContainer to="/all">
                             <Nav.Link>View All Plans</Nav.Link>
                         </LinkContainer >
-                        {/* <NavDropdown title="Account" id="basic-nav-dropdown">
-                            {/* <LinkContainer to="#logout">
-                                <NavDropdown.Item>Log Out</NavDropdown.Item>
-                            </LinkContainer > */}
-
-                            {/* <NavDropdown.Item> */}
-                                <Button variant="outline-primary" onClick={() => auth.setLogin()}>Logout</Button >
-                            {/* </NavDropdown.Item> */}
-
-                        {/* </NavDropdown> */}
+                        <Button variant="outline-primary" onClick={() => auth.setLogin()}>Logout</Button >
                     </Nav>
                 </Navbar.Collapse>
             </Navbar >
@@ -52,7 +42,6 @@ export default function Header() {
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
                     <LinkContainer to="/sample">
-                        {/* PROTECTED  */}
                         <Nav.Link>View Sample Plan</Nav.Link>
                     </LinkContainer >
                     <NavDropdown title="Account" id="basic-nav-dropdown">
@@ -72,7 +61,6 @@ export default function Header() {
         </Navbar >
     )
 }
-
 
 const styles = {
     navbar: {

@@ -4,8 +4,12 @@ import { signup } from '../../api/authentication'
 import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../../AuthContext'
 
-export default function Signup() {
+export default function Signup(props) {
 
+    const from = props.location.state || { from: { pathname: '/' } }
+    console.log('the route we came from: ', from)
+
+    const [redirectToReferrer, setRedirectToReferrer] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [passwordValid, setPasswordValid] = useState("");
@@ -25,17 +29,21 @@ export default function Signup() {
             return false;
         }
 
-        signup(email, password).then((res) => {
+        signup(email, password).then(async (res) => {
             if (!res.success) {
                 alert('Signup has failed. Recheck your credentials');
             }
             else {
                 console.log('Signup Successful -> Logging in.')
-                auth.setLogin()
-
+                await auth.setLogin()
+                setRedirectToReferrer(true)
                 // return <Redirect to="/home" />
             }
         })
+    }
+
+    if (redirectToReferrer) {
+        return <Redirect to={from} />;
     }
 
     return (
