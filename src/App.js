@@ -16,26 +16,38 @@ import { PrivateRoute } from './PrivateRoute'
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(false)
+  const [loggedIn, setLoggedIn] = useState(true)
   // const [user, setUser] = useState(null)
 
   useEffect(() => {
     console.log('logged in state (Main): ', loggedIn)
 
-    // checkSession().then((res) => {
-    //   console.log('session has been checked')
-    //   // console.log('the state of our user: ', validUser)
-    //   // console.log('this is it:', res)
-    // })
+    checkSession().then((res) => {
+      console.log('session has been checked')
+      // console.log('our request, generally')
+      console.log('Response from session check: ', res)
+
+      if(res.data === true){
+        console.log('success')
+      }
+      else{
+        console.log('failure')
+      }
+      // return setLoggedIn(res)
+
+      // console.log('the state of our user: ', validUser)
+      // console.log('this is it:', res)
+    })
   })
 
-  const toggleLogin = () => {
-    if (!loggedIn) {
-      setLoggedIn(true)
-    }
-    else {
-      setLoggedIn(false)
-    }
+  const toggleLogin = (res) => {
+    // if (!loggedIn) {
+    //   setLoggedIn(true)
+    // }
+    // else {
+    //   setLoggedIn(false)
+    // }
+    setLoggedIn(res)
   }
 
   return (

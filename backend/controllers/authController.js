@@ -4,25 +4,31 @@ const User = db.users;
 
 //user login route 
 exports.login = (req, res) => {
-    console.log('The login Request therein: ', req)
-    console.log('Finished Login with this data: ', res)
+    // console.log('The login Request therein: ', req)
+    // console.log('Finished Login with this data: ', res)
 
     // req.logIn(req, function(err) {
     //     if (err) { return next(err); }
     //     console.log('This is our USER: ', req)
     //   });
     // console.log('WE DID IT!')
-    res.send(req.body)
+    console.log('The final login function, or something')
+    res.json(req.user)
 };
 
 //user signup route
 exports.signup = (req, res) => {
     // console.log('Finished Signup with this data: ', res)
     // res.send(res)
-    console.log('SIGNUP REQ: ', req)
-    console.log('SIGNUP RES: ', res)
-    console.log('you made it, good job')
-    res.send(req.body)
+    // console.log('SIGNUP REQ: ', req)
+    // console.log('SIGNUP RES: ', res)
+    // console.log('you made it, good job')
+    // req.session.username = 'WHAT IS MY NAME'
+    // console.log('we have a SESSIONS: ', req.session)
+    // console.log('we have a BIG RE: ', req)
+    // res.send(req.body)
+    res.send('SIGNUP , APPARENTLY')
+
     // const user = {
     //     username: req.body.params.username,
     //     password: req.body.params.password

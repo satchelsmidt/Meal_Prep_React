@@ -16,13 +16,12 @@ passport.use('signup', new LocalStrategy(
         username: username
       }
     }).then((dbUser) => {
-      console.log("THIS IS THE USERNAME REQUEST: ", username)
-      console.log("THIS IS THE PASSWORD REQUEST: ", password)
-      console.log("THIS IS THE SQL REQUEST: ", req)
-      console.log("THIS IS THE D B User: ", dbUser)
+      // console.log("THIS IS THE USERNAME REQUEST: ", username)
+      // console.log("THIS IS THE PASSWORD REQUEST: ", password)
+      // console.log("THIS IS THE SQL REQUEST: ", req)
+      // console.log("THIS IS THE D B User: ", dbUser)
       // If user already exists
       if (dbUser) {
-        console.log('REACHED FIRST OPTION')
         return done(null, false, {
           message: "Email already taken."
         });
@@ -37,14 +36,13 @@ passport.use('signup', new LocalStrategy(
         User.create(user).then((newUser) => {
           //creation failed
           if (!newUser) {
-            console.log('REACHED SECOND OPTION')
             return done(null, false, {
               message: "Unable to create new user."
             });
           }
           //creation succeeded
           if (newUser) {
-            console.log('REACHED THIRD OPTION')
+            console.log("Passport created new user")
             return done(null, newUser);
           }
         })
@@ -84,19 +82,22 @@ passport.use('login', new LocalStrategy(
 ));
 
 // In order to help keep authentication state across HTTP requests, sequelize needs to serialize and deserialize the user. Just consider this part boilerplate needed to make it all work
-passport.serializeUser(function (user, done) {
+passport.serializeUser((user, done) => {
   console.log("SERIALIZE RUN")
   console.log('user: ', user)
   done(null, user.id);
 });
 
-passport.deserializeUser(function (id, done) {
+passport.deserializeUser((id, done) => {
   console.log("DE - SERIALIZE RUN")
-  console.log('user OBJ: ', obj)
-  User.findById(id).then(function (user) {
+  console.log(`user id saved to session: ${id}`)
+  User.findById(id).then((user) => {
     if (user) {
-      done(null, user.get());
+      console.log('found a user that matched our ID')
+      // done(null, user.get());
+      done(null, user)
     } else {
+      console.log('Did not find user that matched our ID')
       done(user.errors, null);
     }
   });

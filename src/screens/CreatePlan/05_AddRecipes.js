@@ -6,50 +6,47 @@ import SmallButton from '../../components/SmallButton'
 
 export default function AddRecipes(props) {
 
-    const [recipeData, setRecipeData] = useState([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
+    const [recipeData, setRecipeData] = useState([])
     const [page, setPage] = useState(1)
-
-    // const renderRecipes = (cuisines, restrictions) => {
-    //     recipeSearch(props.cuisines, props.intolerances, props.diets).then((res) => {
-    //         return res.data.results.map((recipe)=>{
-    //             // console.log('This is the recipes: ', recipe.title)
-    //             return <h2>HELLO</h2>
-    //             // return <h2>{recipe.title}</h2>
-    //         })
-    //         // console.log('This is the RESPONSE: ', res)
-    //     })
-    // }
+    const [currentOffset, setCurrentOffset] = useState(0)
+    //TODO: add in random return of recipes so that it's more fun to search
 
     const renderRecipes = () => {
         return recipeData.map((recipe) => {
-            return <Card style={styles.recipeCard}>
-                <Card.Img variant="top" src="holder.js/100px180" />
+            return <Card style={styles.recipeCard} key={recipe.id}>
+                <Card.Img variant="top" src={recipe.image} />
                 <Card.Body>
-                    <Card.Title>Card Title</Card.Title>
+                    <Card.Title>{recipe.title}</Card.Title>
                     <Card.Text>
-                        Some quick example text to build on the card title and make up the bulk of
-                        the card's content.
-              </Card.Text>
-                    <Button variant="primary">Go somewhere</Button>
+                        Cuisines: {recipe.cuisines.join(', ') + '\n'}
+                        Cook Time: {recipe.readyInMinutes + '\n'}
+                        <a href={recipe.sourceUrl} target="_blank">Link to Recipe</a>
+                    </Card.Text>
+                    {/* <Button variant="primary" onClick={(e)=>addRecipe(e)} ref="btn">Add to Plan</Button> */}
+                    <Button variant="primary" onClick={(e) => addRecipe(e)}>Add to Plan</Button>
                 </Card.Body>
             </Card>
         })
     }
 
     const renderNewPage = () => {
-        //when user clicks next page, we increment page var and modify the state
+        setCurrentOffset(currentOffset + 12)
         setPage(page + 1)
     }
 
-    // return props.diets.map((diet) => {
-    //     return <SmallButton text={diet}></SmallButton>
-    // })
+    const renderPrevPage = () => {
+        setCurrentOffset(currentOffset - 12)
+        setPage(page - 1)
+    }
 
-    //TODO: make this, work again
+    function addRecipe(e) {
+        console.log('the button that we clicked maybe: ', e.target)
+        e.target.setAttribute("disabled", true)
+        e.target.insertAdjacentHTML("afterend", `<Button variant="primary">Hello I am button</Button>`)
+    }
+
     useEffect(() => {
-        // console.log(recipeSearch)
-        recipeSearch(props.cuisines, props.intolerances, props.diets).then((res) => {
-            console.log('This is the RESPONSE: ', res)
+        recipeSearch(props.cuisines, props.intolerances, props.diets, currentOffset).then((res) => {
             setRecipeData(res.data.results)
         })
     }, [page])
@@ -57,15 +54,15 @@ export default function AddRecipes(props) {
     return (
         <Container style={styles.formContainer}>
             <p style={styles.p}>These are some recipes that fit what you're looking for. </p>
-
+            <br></br>
             <p style={styles.p}>This is where you can add the recipes you'd like to cook to your final prep plan!</p>
             <Container style={styles.cardContainer}>
-
                 {renderRecipes()}
             </Container>
-
-            <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
-
+            <Container style={styles.buttonsContainer}>
+                {currentOffset > 0 && <SmallButton text="Previous" onClick={(e) => { renderPrevPage(e) }} />}
+                <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
+            </Container>
         </Container>
     );
 }
@@ -92,6 +89,12 @@ const styles = {
         'justifyContent': 'space-between',
         'overflow': 'auto',
         'height': 'auto',
+    },
+    buttonsContainer: {
+        'display': 'flex',
+        'flexDirection': 'row',
+        'alignItems': 'center',
+        'justifyContent': 'center',
     },
     recipeCard: {
         'padding': '10px',
