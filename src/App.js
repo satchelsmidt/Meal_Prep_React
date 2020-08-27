@@ -16,57 +16,57 @@ import { PrivateRoute } from './PrivateRoute'
 
 export default function App() {
 
-  const [loggedIn, setLoggedIn] = useState(true)
-  // const [user, setUser] = useState(null)
+  const [loggedIn, setLoggedIn] = useState(false)
+  const [user, setUser] = useState(null)
 
   useEffect(() => {
-    console.log('logged in state (Main): ', loggedIn)
 
-    checkSession().then((res) => {
-      console.log('session has been checked')
-      // console.log('our request, generally')
-      console.log('Response from session check: ', res)
+    //if user is not logged in, check to see if session exists
+    if (!loggedIn) {
+      console.log('Checking session...')
+      checkSession().then((res) => {
+        console.log('Response from session check: ', res)
 
-      if(res.data === true){
-        console.log('success')
-      }
-      else{
-        console.log('failure')
-      }
-      // return setLoggedIn(res)
+        //if our session check returns false for isAuthenticated, log out user
+        if (!res.success) {
+          console.log('user not logged in, logging out')
+          // setLoggedIn(false)
+        }
+        //otherwise, log them in and redirect to home page
+        else {
+          console.log('Existing Session Detected')
+          setLoggedIn(true)
+          setUser(res.data)
+        }
+      })
+    }
 
-      // console.log('the state of our user: ', validUser)
-      // console.log('this is it:', res)
-    })
-  })
+  }, [loggedIn])
 
-  const toggleLogin = (res) => {
-    // if (!loggedIn) {
-    //   setLoggedIn(true)
-    // }
-    // else {
-    //   setLoggedIn(false)
-    // }
-    setLoggedIn(res)
+  const handleLogin = async (res) => {
+    console.log('this is the login handler: ')
+    console.log(res)
+    setUser(res.data)
+    await setLoggedIn(res.success)
   }
 
   return (
-    <AuthContext.Provider value={{ loggedIn: loggedIn, setLogin: toggleLogin }}>
+    <AuthContext.Provider value={{ loggedIn: loggedIn, user: user, handleLogin: handleLogin }}>
       <BrowserRouter>
         <Container>
           <Header></Header>
           <Switch>
-            {/* PUBLIC ROUTES*/}
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-            <Route path='/password' component={Password} />
-            <Route path='/sample' component={SamplePlan} />
-
             {/* PROTECTED  ROUTES*/}
             <PrivateRoute exact path='/' component={Main} />
             <PrivateRoute path='/all' component={AllPlans} />
             <PrivateRoute path='/create' component={CreatePlan} />
             <PrivateRoute path='/plan' component={SinglePlan} />
+
+            {/* PUBLIC ROUTES*/}
+            <Route exact path='/login' component={Login} />
+            <Route exact path='/signup' component={Signup} />
+            <Route path='/password' component={Password} />
+            <Route path='/sample' component={SamplePlan} />
           </Switch>
         </Container>
       </BrowserRouter>

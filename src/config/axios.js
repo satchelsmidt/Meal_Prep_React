@@ -8,4 +8,5 @@ export const axiosFoodInstance = axios.create({
 export const axiosAuthInstance = axios.create({
         baseURL: "http://localhost:8080/api/auth",
         timeout: 50000,
+        withCredentials: true
     });

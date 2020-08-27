@@ -18,7 +18,7 @@ exports.login = (req, res) => {
 
 //user signup route
 exports.signup = (req, res) => {
-    // console.log('Finished Signup with this data: ', res)
+    console.log('Finished Signup with this data: ', res)
     // res.send(res)
     // console.log('SIGNUP REQ: ', req)
     // console.log('SIGNUP RES: ', res)
@@ -27,7 +27,7 @@ exports.signup = (req, res) => {
     // console.log('we have a SESSIONS: ', req.session)
     // console.log('we have a BIG RE: ', req)
     // res.send(req.body)
-    res.send('SIGNUP , APPARENTLY')
+    res.send(req.user)
 
     // const user = {
     //     username: req.body.params.username,

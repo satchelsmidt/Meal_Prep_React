@@ -1,9 +1,8 @@
-import React, { useState, useEffect, useContext } from "react";
-import { Button, Form, Container, Alert } from "react-bootstrap";
+import React, { useState, useContext } from "react";
+import { Button, Form, Container } from "react-bootstrap";
 import { Redirect } from 'react-router-dom';
 import { login } from '../../api/authentication'
 import { AuthContext } from '../../AuthContext'
-import axios from 'axios'
 
 export default function Login(props) {
 
@@ -21,31 +20,25 @@ export default function Login(props) {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        axios.post('http://localhost:8080/api/auth/login', { username: email, password: password }, {
-            withCredentials: true
-        }).then((req, res) => {
-            // console.log('mnaybe a response idk: ', res)
-            // console.log('maybe a request who knows: ', req)
-            // res.json(req.user);
+        login(email, password).then(async (res) => {
+            if (!res.success) {
+                alert('Login has failed. Recheck your credentials');
+            }
+            else {
+                console.log('User Successfully Logged in.')
+                console.log('Route to redirect to: ', from)
+                await auth.handleLogin(res)
+                setRedirectToReferrer(true)
+            }
         })
-
-        
-        // login(email, password).then(async (res) => {
-        //     if (!res.status === 200) {
-        //         console.log('something went horribly wrong')
-        //     }
-        //     else {
-        //         console.log('User Successfully Logged in.')
-        //         console.log('This is the data returned from login: ', res)
-        //         await auth.setLogin(res.data)
-        //         setRedirectToReferrer(true)
-        //         // auth.setUser()
-        //     }
-        // })
     }
 
     if (redirectToReferrer) {
         return <Redirect to={from} />;
+    }
+
+    if(auth.loggedIn){
+        return <Redirect to='/' />;
     }
 
     return (

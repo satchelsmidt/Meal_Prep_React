@@ -6,10 +6,10 @@ import * as Restrictions from '../../config/restrictions.json'
 
 export default function RecipeRestrictions(props) {
 
-    const saveAndSubmit = (e) => {
-        e.preventDefault()
-        props.nextStep()
-    }
+    // const saveAndSubmit = (e) => {
+    //     e.preventDefault()
+    //     props.nextStep()
+    // }
 
     const renderDietsDropdown = () => {
         return Restrictions.diets.map((diet) => {

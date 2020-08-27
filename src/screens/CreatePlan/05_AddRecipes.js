@@ -20,7 +20,7 @@ export default function AddRecipes(props) {
                     <Card.Text>
                         Cuisines: {recipe.cuisines.join(', ') + '\n'}
                         Cook Time: {recipe.readyInMinutes + '\n'}
-                        <a href={recipe.sourceUrl} target="_blank">Link to Recipe</a>
+                        <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">Link to Recipe</a>
                     </Card.Text>
                     {/* <Button variant="primary" onClick={(e)=>addRecipe(e)} ref="btn">Add to Plan</Button> */}
                     <Button variant="primary" onClick={(e) => addRecipe(e)}>Add to Plan</Button>

@@ -2,7 +2,6 @@ import React from 'react'
 import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
-import { Container } from 'react-bootstrap'
 
 export default function Calendar(props) {
     return (
@@ -22,10 +21,4 @@ export default function Calendar(props) {
             />
         // </ Container>
     )
-}
-
-const styles = {
-    calendarContainer:{
-        'backgroundColor' : 'grey'
-    }
 }

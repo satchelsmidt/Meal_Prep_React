@@ -1,11 +1,19 @@
 import React, { useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
+import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../AuthContext'
+import { logout } from '../api/authentication'
 
 export default function Header() {
 
     const auth = useContext(AuthContext)
+
+    const handleLogout = () => {
+        logout()
+        // auth.handleLogin()
+        return <Redirect to='/login' />
+    }
 
     //IF USER IS LOGGED IN
     if (auth.loggedIn) {
@@ -24,7 +32,7 @@ export default function Header() {
                         <LinkContainer to="/all">
                             <Nav.Link>View All Plans</Nav.Link>
                         </LinkContainer >
-                        <Button variant="outline-primary" onClick={() => auth.setLogin()}>Logout</Button >
+                        <Button variant="outline-primary" onClick={() => handleLogout()}>Logout</Button >
                     </Nav>
                 </Navbar.Collapse>
             </Navbar >

@@ -22,28 +22,9 @@ module.exports = app => {
     // })
     router.post("/login", passport.authenticate('login'), (req, res) => {
         console.log('Callback after passport login:')
-        // console.log('User returned: ', req.user)
-        // console.log('Session returned: ', req.session)
-        // res.json(req.user)
-
-        const user = JSON.parse(JSON.stringify(req.user)) // hack
-        console.log('OUR NEW USER: ', user)
-        const cleanUser = Object.assign({}, user)
-        // if (cleanUser.local) {
-        // 	console.log(`Deleting ${cleanUser.local.password}`)
-        // 	delete cleanUser.local.password
-        // }
-        console.log('OUR   CLEAN   USER: ', cleanUser)
-
-        //SHOULD HELP FIX ERROR? 
         req.session.save(() => {
             res.json(req.user)
         })
-
-        
-        // console.log('we have no response apparently: ', res)
-        // res.json({ user: cleanUser })
-
     })
 
     //May not need to call this or anything
@@ -59,14 +40,29 @@ module.exports = app => {
     router.get('/user', (req, res, next) => {
         console.log('inside our GET user callback')
         console.log('our request user: ', req.user)
-
         console.log(`is current user authenticated? ${req.isAuthenticated()}`)
         if (req.isAuthenticated()) {
-            console.log('User successfully authenticated')
-            res.send(req.isAuthenticated())
-        } else {
-            console.log('something went wrong')
-            res.send(false)
+            console.log('We have a valid session')
+            res.send(req.user)
+        }
+        else {
+            return status(400)
+        }
+    })
+
+    router.get('/logout', (req, res, next) => {
+        console.log('inside logout function')
+        if (req.isAuthenticated()) {
+            console.log('logging out user...')
+            req.logout()
+            req.session.destroy(function (err) {
+                if (err) { return next(err); }
+                // The response should indicate that the user is no longer authenticated.
+                return res.send({ authenticated: req.isAuthenticated() });
+            });
+        }
+        else {
+            return res.status(400)
         }
     })
 

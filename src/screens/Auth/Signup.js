@@ -6,7 +6,7 @@ import { AuthContext } from '../../AuthContext'
 
 export default function Signup(props) {
 
-    const from = props.location.state || { from: { pathname: '/' } }
+    const from = { from: { pathname: '/' } }
 
     const [redirectToReferrer, setRedirectToReferrer] = useState(false);
     const [email, setEmail] = useState("");
@@ -34,7 +34,8 @@ export default function Signup(props) {
             }
             else {
                 console.log('Signup Successful -> Logging in.')
-                await auth.setLogin()
+                console.log('Route to redirect to: ', from)
+                await auth.handleLogin(res)
                 setRedirectToReferrer(true)
             }
         })

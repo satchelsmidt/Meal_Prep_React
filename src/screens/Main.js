@@ -1,10 +1,17 @@
-import React from 'react';
+import React, {useContext, useEffect} from 'react';
 import { Container } from 'react-bootstrap'
 import BigButton from '../components/BigButton'
 import { NavLink } from 'react-router-dom'
+import { AuthContext } from '../AuthContext'
 
 
 export default function Main() {
+
+    const auth = useContext(AuthContext)
+
+    useEffect(()=>{
+        console.log('this is our current user: ', auth.user)
+    }, [auth.user])
 
     return (
         <Container style={styles.formContainer}>
