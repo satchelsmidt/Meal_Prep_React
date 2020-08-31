@@ -19,7 +19,8 @@ export default function recipeSearch(cuisines, intolerances, diet, offset) {
             number: 2,
             offset: offset,
             sort: "popularity",
-            addRecipeInformation: true
+            addRecipeInformation: true,
+            fillIngredients: true
         }
     })
 }

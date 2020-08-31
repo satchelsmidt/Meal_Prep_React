@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Container } from 'react-bootstrap'
 import PlanStart from './01_PlanStart'
 import PlanTimes from './02_PlanTimes'
@@ -6,6 +6,9 @@ import RecipeTypes from './03_RecipeTypes'
 import RecipeRestrictions from './04_RecipeRestrictions'
 import moment from 'moment';
 import AddRecipes from './05_AddRecipes'
+import {createPlan, addPlanRecipes} from '../../api/plans'
+import { AuthContext } from '../../AuthContext'
+import { addRecipes } from '../../api/recipes';
 
 export default function CreatePlan() {
 
@@ -16,7 +19,9 @@ export default function CreatePlan() {
     const [planCuisines, setPlanCuisines] = useState([])
     const [planIntolerances, setPlanIntolerances] = useState([])
     const [planDiets, setPlanDiets] = useState([])
+    const [planRecipes, setPlanRecipes] = useState([])
 
+    const auth = useContext(AuthContext)
 
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
@@ -43,7 +48,45 @@ export default function CreatePlan() {
             setPlanDates(planDatesCopy)
             setPlanTimes(planTimesCopy)
         }
+
         setStep(step = step + 1)
+    }
+
+    const handleFormSubmit=()=>{
+        let planId
+
+        console.log('submitting form...')
+
+        createPlan(
+            auth.user, 
+            startDate, planDates, planTimes, planCuisines, planIntolerances, planDiets).then((res)=>{
+            console.log('ressponse from create plan: ', res)
+            console.log('plan created')
+            planId = res.data.id
+            // return <Redirect to="/plan"></Redirect>
+
+            // console.log('this is plan id: ', planId)
+        })
+
+        console.log('recipes data: ', planRecipes)
+        for(let recipe of planRecipes){
+            addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then((res)=>{
+                console.log('added new recipe: ', res)
+                //for each recipe added, create record using that recipe PLUS current plan ID to create many to many relationship in db
+                const planRecipeDetails = {
+                    planId: planId,
+                    recipeId: res.data.id
+                }
+
+                addPlanRecipes(planRecipeDetails)
+
+            })
+        }
+
+        console.log('added all them recipes')
+        // addRecipes(
+
+        // )
     }
 
     const prevStep = () => {
@@ -124,6 +167,17 @@ export default function CreatePlan() {
         await setPlanDiets(dietsCopy)
     }
 
+    const addNewRecipe = async (recipe) => {
+        //shallow copy of restrictions
+        let recipesCopy = [...planRecipes]
+
+        //add restriction to copy
+        recipesCopy.push(recipe)
+
+        //modify state of restrictions arr
+        await setPlanRecipes(recipesCopy)
+    }
+
     useEffect(() => {
         console.log('beginning date of our plan (stored): ', startDate)
         console.log('list of days for our plan (stored): ', planDates)
@@ -132,6 +186,7 @@ export default function CreatePlan() {
         console.log('OUR CUISINES (MOST RECENT): ', planCuisines)
         console.log('OUR Intoleranecs (MOST RECENT): ', planIntolerances)
         console.log('OUR Diets (MOST RECENT): ', planDiets)
+        console.log('OUR RECIPES (by ID)): ', planRecipes)
     })
 
     const formSteps = () => {
@@ -175,7 +230,9 @@ export default function CreatePlan() {
                     cuisines={planCuisines}
                     intolerances={planIntolerances}
                     diets={planDiets}
+                    addNewRecipe={(recipe) => addNewRecipe(recipe)}
                     prevStep={() => prevStep()}
+                    handleFormSubmit={()=>handleFormSubmit()}
                     handleChange={() => handleInputChange()}
                 />
             default:

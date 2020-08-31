@@ -34,7 +34,6 @@ export default function Signup(props) {
             }
             else {
                 console.log('Signup Successful -> Logging in.')
-                console.log('Route to redirect to: ', from)
                 await auth.handleLogin(res)
                 setRedirectToReferrer(true)
             }
@@ -43,6 +42,10 @@ export default function Signup(props) {
 
     if (redirectToReferrer) {
         return <Redirect to={from} />;
+    }
+
+    if(auth.loggedIn){
+        return <Redirect to='/' />;
     }
 
     return (

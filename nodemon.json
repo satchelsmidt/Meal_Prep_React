@@ -1,0 +1,7 @@
+{
+    "events": {
+      "restart": "lsof -i :8080 -t | xargs kill",
+      "crash": "lsof -i :8080 -t | xargs kill"
+    },
+    "delay": "1500"
+  }

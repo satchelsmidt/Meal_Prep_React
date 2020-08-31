@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
-import { Redirect } from 'react-router-dom';
 import { AuthContext } from '../AuthContext'
 import { logout } from '../api/authentication'
 
@@ -10,15 +9,15 @@ export default function Header() {
     const auth = useContext(AuthContext)
 
     const handleLogout = () => {
-        logout()
-        // auth.handleLogin()
-        return <Redirect to='/login' />
+        logout().then((res)=>{
+            auth.handleLogin(res.success)
+        })
     }
 
     //IF USER IS LOGGED IN
     if (auth.loggedIn) {
         return (
-            <Navbar bg="light" expand="lg" className='navbar' style={styles.navbar}>
+            <Navbar collapseOnSelect bg="light" expand="lg" className='navbar' style={styles.navbar}>
                 <LinkContainer to="/">
                     <Navbar.Brand>Preppy</Navbar.Brand>
                 </LinkContainer >

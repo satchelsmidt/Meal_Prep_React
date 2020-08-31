@@ -53,6 +53,7 @@ app.use(passport.session());
 //Require api routes
 require("./routes/planRoutes")(app)
 require("./routes/authRoutes")(app)
+require("./routes/recipeRoutes")(app)
 
 //initialize PORT var, set app listener
 const PORT = process.env.PORT || 8080;

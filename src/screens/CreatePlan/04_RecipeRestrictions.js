@@ -59,6 +59,7 @@ export default function RecipeRestrictions(props) {
         <Container style={styles.formContainer}>
             <p style={styles.p}>Select the dietary restrictions you'd like your plan to follow:</p>
             <Container style={styles.innerContainer}>
+                <p>HELLO</p>
                 <Container style={styles.innerContainerDropdown}>
                     <Dropdown >
                         <Dropdown.Toggle variant="success" id="dropdown-basic"

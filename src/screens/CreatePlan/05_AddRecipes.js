@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap'
 import recipeSearch from '../../api/recipeSearch'
 import SmallButton from '../../components/SmallButton'
-
+import { NavLink } from 'react-router-dom'
 
 export default function AddRecipes(props) {
 
@@ -10,6 +10,14 @@ export default function AddRecipes(props) {
     const [page, setPage] = useState(1)
     const [currentOffset, setCurrentOffset] = useState(0)
     //TODO: add in random return of recipes so that it's more fun to search
+
+    const selectRecipe = (e) => {
+        console.log('our recipe details: ', e.target.getAttribute('recipedetails'))
+        props.addNewRecipe(JSON.parse(e.target.getAttribute('recipedetails')))
+
+        e.target.setAttribute("disabled", true)
+        // e.target.insertAdjacentHTML("afterend", `<Button variant="primary" onClick=${() => removeRecipe()}>Remove from plan</Button>`)
+    }
 
     const renderRecipes = () => {
         return recipeData.map((recipe) => {
@@ -23,7 +31,7 @@ export default function AddRecipes(props) {
                         <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">Link to Recipe</a>
                     </Card.Text>
                     {/* <Button variant="primary" onClick={(e)=>addRecipe(e)} ref="btn">Add to Plan</Button> */}
-                    <Button variant="primary" onClick={(e) => addRecipe(e)}>Add to Plan</Button>
+                    <Button variant="primary" recipedetails={JSON.stringify(recipe)} onClick={(e) => selectRecipe(e)}>Add to Plan</Button>
                 </Card.Body>
             </Card>
         })
@@ -39,14 +47,19 @@ export default function AddRecipes(props) {
         setPage(page - 1)
     }
 
-    function addRecipe(e) {
-        console.log('the button that we clicked maybe: ', e.target)
-        e.target.setAttribute("disabled", true)
-        e.target.insertAdjacentHTML("afterend", `<Button variant="primary">Hello I am button</Button>`)
+    // function addRecipe(e) {
+    //     console.log('the button that we clicked maybe: ', e.target)
+    //     e.target.setAttribute("disabled", true)
+    //     e.target.insertAdjacentHTML("afterend", `<Button variant="primary" onClick="${()=>removeRecipe()}">Remove from plan</Button>`)
+    // }
+
+    function removeRecipe(e) {
+        console.log('you removed a recipe')
     }
 
     useEffect(() => {
         recipeSearch(props.cuisines, props.intolerances, props.diets, currentOffset).then((res) => {
+            console.log('results from search: ', res.data.results)
             setRecipeData(res.data.results)
         })
     }, [page])
@@ -63,6 +76,10 @@ export default function AddRecipes(props) {
                 {currentOffset > 0 && <SmallButton text="Previous" onClick={(e) => { renderPrevPage(e) }} />}
                 <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
             </Container>
+            {/* <SmallButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></SmallButton> */}
+            <NavLink to="/plan">
+                <SmallButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></SmallButton>
+            </NavLink>
         </Container>
     );
 }

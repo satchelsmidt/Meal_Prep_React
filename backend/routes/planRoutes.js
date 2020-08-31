@@ -4,7 +4,15 @@ module.exports = app =>{
     var router = require('express').Router();
 
     //Create plan
-    router.post("/", plans.create);
+    router.post("/create_plan", plans.create);
+
+    //add recipes tied to one plan
+    router.post("/plan_recipes", plans.planRecipes)
+
+
+
+    //Current Plan
+    router.post("/current_plan", plans.create);
 
     //Retrieve all plans
     router.get("/", plans.findAll);

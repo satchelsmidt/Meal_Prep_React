@@ -1,6 +1,7 @@
 const db = require("../models");
 
 const Plan = db.plans;
+const PlanRecipes = db.recipe_plans
 const Op = db.Sequelize.Op;
 
 //create single plan route -> modify to tie to logged in user (if user is logged in)
@@ -11,18 +12,37 @@ exports.create = (req, res) => {
 
     //create plan
     const plan = {
-        startDate: req.body.startDate
+        userId: req.body.userId,
+        startDate: req.body.startDate,
+        planDates: req.body.planDates,
+        planTimes: req.body.planTimes,
+        planCuisines: req.body.planCuisines,
+        planIntolerances: req.body.planIntolerances,
+        planDiets: req.body.planDiets
     }
 
     //save plan to db
     Plan.create(plan).then((data) => {
         res.send(data);
     }).catch((err) => {
+        console.log('this is the err when creating plan: ', err)
         res.status(500).send({
             message: err.message || "Unable to create plan."
         });
     });
 };
+
+exports.planRecipes = (req, res) => {
+    PlanRecipes.create(req.body, {
+    }).then(function (data) {
+        res.json(data)
+    }).catch((err) => {
+        console.log('this is the err when creating Plan Recipes: ', err)
+        res.status(500).send({
+            message: err.message || "Unable to create plan Recipes."
+        });
+    });
+}
 
 //retrieve all plans route -> modify to retrieve all plans for logged in user
 exports.findAll = (req, res) => {

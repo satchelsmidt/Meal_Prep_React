@@ -15,7 +15,7 @@ export function signup(username, password) {
 }
 
 export function checkSession() {
-    return axiosAuthInstance.get('/user')
+    return axiosAuthInstance.get('/session')
         .then((res) => ({ success: true, message: 'Valid Session', data: res.data })).catch((res) => ({ success: false, message: res, data: res }))
 }
 
