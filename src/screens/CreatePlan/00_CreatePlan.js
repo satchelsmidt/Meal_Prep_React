@@ -6,9 +6,10 @@ import RecipeTypes from './03_RecipeTypes'
 import RecipeRestrictions from './04_RecipeRestrictions'
 import moment from 'moment';
 import AddRecipes from './05_AddRecipes'
-import {createPlan, addPlanRecipes} from '../../api/plans'
+import { createPlan, addPlanRecipes } from '../../api/plans'
 import { AuthContext } from '../../AuthContext'
 import { addRecipes } from '../../api/recipes';
+import { useHistory } from "react-router-dom";
 
 export default function CreatePlan() {
 
@@ -22,6 +23,7 @@ export default function CreatePlan() {
     const [planRecipes, setPlanRecipes] = useState([])
 
     const auth = useContext(AuthContext)
+    const history = useHistory();
 
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
@@ -52,41 +54,39 @@ export default function CreatePlan() {
         setStep(step = step + 1)
     }
 
-    const handleFormSubmit=()=>{
+    const handleFormSubmit = () => {
         let planId
 
         console.log('submitting form...')
 
-        createPlan(
-            auth.user, 
-            startDate, planDates, planTimes, planCuisines, planIntolerances, planDiets).then((res)=>{
-            console.log('ressponse from create plan: ', res)
+        //TODO: Consolidate this data into object, change states to single object with these details in it
+        createPlan(auth.user, startDate, planDates, planTimes, planCuisines, planIntolerances, planDiets).then((res) => {
+
             console.log('plan created')
             planId = res.data.id
-            // return <Redirect to="/plan"></Redirect>
 
-            // console.log('this is plan id: ', planId)
+        }).then(async () => {
+            for (let recipe of planRecipes) {
+                await addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then( async (res) => {
+                    console.log('added new recipe: ', res)
+
+                    //for each recipe added, create record using that recipe PLUS current plan ID to create many to many relationship in db
+                    const planRecipeDetails = {
+                        planId: planId,
+                        recipeId: res.data.id
+                    }
+
+                    await addPlanRecipes(planRecipeDetails)
+                })
+            }
+        }).then(() => {
+            //TODO: include navigation to correct URL at this point
+            history.push("/single_plan/" + planId);
         })
 
-        console.log('recipes data: ', planRecipes)
-        for(let recipe of planRecipes){
-            addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then((res)=>{
-                console.log('added new recipe: ', res)
-                //for each recipe added, create record using that recipe PLUS current plan ID to create many to many relationship in db
-                const planRecipeDetails = {
-                    planId: planId,
-                    recipeId: res.data.id
-                }
-
-                addPlanRecipes(planRecipeDetails)
-
-            })
-        }
-
-        console.log('added all them recipes')
-        // addRecipes(
-
-        // )
+        // }).catch((err) => {
+        //     console.log(err)
+        // })
     }
 
     const prevStep = () => {
@@ -232,7 +232,7 @@ export default function CreatePlan() {
                     diets={planDiets}
                     addNewRecipe={(recipe) => addNewRecipe(recipe)}
                     prevStep={() => prevStep()}
-                    handleFormSubmit={()=>handleFormSubmit()}
+                    handleFormSubmit={() => handleFormSubmit()}
                     handleChange={() => handleInputChange()}
                 />
             default:

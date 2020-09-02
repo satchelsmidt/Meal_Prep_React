@@ -28,16 +28,5 @@ module.exports = (sequelize, Sequelize) => {
         user.password = bcrypt.hashSync(user.password, bcrypt.genSaltSync(10), null);
     });
 
-    //Associating each user with a number of plans made by them. Deleting a user deletes all associated plans
-    // User.associate = function (models) {
-    //     User.hasMany(models.Plan,
-    //         {
-    //             as: 'plans',
-    //             foreignKey: 'userId',
-    //             onDelete: "cascade"
-    //         });
-    // };
-
-
     return User;
 };

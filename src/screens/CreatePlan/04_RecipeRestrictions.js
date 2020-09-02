@@ -6,11 +6,6 @@ import * as Restrictions from '../../config/restrictions.json'
 
 export default function RecipeRestrictions(props) {
 
-    // const saveAndSubmit = (e) => {
-    //     e.preventDefault()
-    //     props.nextStep()
-    // }
-
     const renderDietsDropdown = () => {
         return Restrictions.diets.map((diet) => {
             return <Dropdown.Item onClick={() => selectDiets(diet)}>{diet}</Dropdown.Item>
@@ -25,7 +20,6 @@ export default function RecipeRestrictions(props) {
 
     const selectDiets = (diet) => {
         if (props.diets.indexOf(diet) < 0) {
-            console.log('diet IN FUNCTION: ', diet)
             props.addNewDiet(diet)
         }
         else {
@@ -35,7 +29,6 @@ export default function RecipeRestrictions(props) {
 
     const selectIntolerances = (intolerance) => {
         if (props.intolerances.indexOf(intolerance) < 0) {
-            console.log('intolerance IN FUNCTION: ', intolerance)
             props.addNewIntolerance(intolerance)
         }
         else {
@@ -59,7 +52,6 @@ export default function RecipeRestrictions(props) {
         <Container style={styles.formContainer}>
             <p style={styles.p}>Select the dietary restrictions you'd like your plan to follow:</p>
             <Container style={styles.innerContainer}>
-                <p>HELLO</p>
                 <Container style={styles.innerContainerDropdown}>
                     <Dropdown >
                         <Dropdown.Toggle variant="success" id="dropdown-basic"
@@ -89,14 +81,9 @@ export default function RecipeRestrictions(props) {
                 <Container style={styles.innerContainerButtons}>
                     {renderIntoleranceButtons()}
                     {renderDietButtons()}
-                    {/* <SmallButton text="Vegetarian"></SmallButton>
-                    <SmallButton text="Wheat Allergy"></SmallButton>
-                    <SmallButton text="Fish"></SmallButton> */}
                 </Container>
             </Container>
             <SmallButton text="Back" onClick={() => { props.prevStep() }}></SmallButton>
-            {/* <SmallButton text="Next" onClick={(e) => { saveAndSubmit(e) }}></SmallButton> */}
-            {/* <NavLink to="/add"><BigButton text="Search for Recipes"></BigButton></NavLink> */}
             <SmallButton text="Next" onClick={(e) => { props.nextStep(e) }}></SmallButton>
         </Container>
     );

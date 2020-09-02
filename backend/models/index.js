@@ -1,11 +1,11 @@
 const dbConfig = require("../config/db/config");
 
+//import + initialize Sequelize using config params
+const Sequelize = require("sequelize");
+
 //TODO: make this work when you deploy
 // const env = process.env.NODE_ENV || 'development';
 // const deployConfig = require(__dirname + '/../config/config.json')[env];
-
-//import + initialize Sequelize using config params
-const Sequelize = require("sequelize");
 
 // let sequelize;
 

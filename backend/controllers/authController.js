@@ -24,6 +24,7 @@ exports.allUsers = (req, res) => {
 
 //logic to check if we have an existing valid session
 exports.session = (req, res) => {
+    console.log('Request body from session check: ', req)
     console.log('current user: ', req.user)
     console.log(`is current user authenticated? ${req.isAuthenticated()}`)
     if (req.isAuthenticated()) {

@@ -1,12 +1,10 @@
 const db = require("../models");
 
 const Recipe = db.recipes;
-const Op = db.Sequelize.Op;
 
-//create single plan route -> modify to tie to logged in user (if user is logged in)
 exports.add = (req, res) => {
 
-    //create recipe
+    //recipe object
     const recipe = {
         recipe_title: req.body.recipeTitle,
         recipe_image: req.body.recipeImage,
@@ -19,14 +17,12 @@ exports.add = (req, res) => {
         recipe_ingredients: req.body.recipeIngredients,
         recipe_steps: req.body.recipeSteps,
     }
-    
 
-
-    //save plan to db
+    //create recipe and save to db
     Recipe.create(recipe).then((data) => {
         res.send(data);
     }).catch((err) => {
-        console.log('this is the err when creating plan: ', err)
+        console.log('Error adding recipe: ', err)
         res.status(500).send({
             message: err.message || "Unable to create plan."
         });

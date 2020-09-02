@@ -63,7 +63,7 @@ export default function App() {
             <PrivateRoute exact path='/' component={Main} />
             <PrivateRoute path='/all' component={AllPlans} />
             <PrivateRoute path='/create' component={CreatePlan} />
-            <PrivateRoute path='/plan' component={SinglePlan} />
+            <PrivateRoute path='/single_plan/:planId' component={SinglePlan} />
 
             {/* PUBLIC ROUTES*/}
             <Route exact path='/login' component={Login} />

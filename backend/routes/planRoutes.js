@@ -1,4 +1,4 @@
-module.exports = app =>{
+module.exports = app => {
     const plans = require("../controllers/planController");
 
     var router = require('express').Router();
@@ -9,6 +9,10 @@ module.exports = app =>{
     //add recipes tied to one plan
     router.post("/plan_recipes", plans.planRecipes)
 
+    //Return plan that matches id in url
+    router.get("/single_plan/:planId", plans.findOne)
+
+
 
 
     //Current Plan
@@ -18,7 +22,7 @@ module.exports = app =>{
     router.get("/", plans.findAll);
 
     //Find plan by id
-    router.get("/:id", plans.findOne);
+    // router.get("/:id", plans.findOne);
 
     //Delete plan by id
     router.delete("/:id", plans.delete);

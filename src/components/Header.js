@@ -9,7 +9,8 @@ export default function Header() {
     const auth = useContext(AuthContext)
 
     const handleLogout = () => {
-        logout().then((res)=>{
+        logout()
+        .then((res)=>{
             auth.handleLogin(res.success)
         })
     }

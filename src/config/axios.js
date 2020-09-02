@@ -14,11 +14,9 @@ export const axiosAuthInstance = axios.create({
 export const axiosPlansInstance = axios.create({
     baseURL: "http://localhost:8080/api/plans",
     timeout: 50000,
-    // withCredentials: true
 });
 
 export const axiosRecipesInstance = axios.create({
     baseURL: "http://localhost:8080/api/recipes",
     timeout: 50000,
-    // withCredentials: true
 });

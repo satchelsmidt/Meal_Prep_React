@@ -18,17 +18,17 @@ export default function RecipeTypes(props) {
     }
 
     const selectCuisines = (cuisine) => {
-        if(props.cuisines.indexOf(cuisine)<0){
+        if (props.cuisines.indexOf(cuisine) < 0) {
             console.log('CUISINE IN FUNCTION: ', cuisine)
             props.addNewCuisine(cuisine)
         }
-        else{
+        else {
             console.log("CUISINE ALREADY IN ARRAY")
         }
     }
 
     const renderCuisineButtons = () => {
-        return props.cuisines.map((cuisine)=>{
+        return props.cuisines.map((cuisine) => {
             return <SmallButton text={cuisine}></SmallButton>
         })
     }
@@ -46,18 +46,15 @@ export default function RecipeTypes(props) {
                             Cuisines
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
-                            <Dropdown.Item href="#/action-1">Surprise Me!</Dropdown.Item>
-                            <Dropdown.Divider />
-                            {/* Replace these with auto render of each cuisine in cuisines arr */}
+                            {/* TODO: make this functional */}
+                            {/* <Dropdown.Item href="#/action-1">Surprise Me!</Dropdown.Item> */}
+                            {/* <Dropdown.Divider /> */}
                             {renderCuisinesDropdown()}
                         </Dropdown.Menu>
                     </Dropdown>
                 </Container>
                 <Container style={styles.innerInnerContainer}>
                     {renderCuisineButtons()}
-                    {/* <SmallButton text="Italian"></SmallButton>
-                    <SmallButton text="Italian"></SmallButton>
-                    <SmallButton text="Italian"></SmallButton> */}
                 </Container>
             </Container>
             <SmallButton text="Back" onClick={() => { props.prevStep() }}></SmallButton>

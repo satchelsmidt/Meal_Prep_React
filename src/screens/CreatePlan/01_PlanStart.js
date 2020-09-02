@@ -3,8 +3,6 @@ import { Container } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 import SmallButton from '../../components/SmallButton'
-import { createPlan } from '../../api/plans'
-
 
 export default function PlanStart(props) {
 
@@ -17,11 +15,7 @@ export default function PlanStart(props) {
 
     const saveAndSubmit = (e) => {
         e.preventDefault()
-        // createPlan(currentDate).then((res) => {
-        //     console.log
-            props.nextStep()
-
-        // })
+        props.nextStep()
     }
 
     return (

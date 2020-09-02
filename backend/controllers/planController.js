@@ -2,7 +2,7 @@ const db = require("../models");
 
 const Plan = db.plans;
 const PlanRecipes = db.recipe_plans
-const Op = db.Sequelize.Op;
+const Recipe = db.recipes;
 
 //create single plan route -> modify to tie to logged in user (if user is logged in)
 exports.create = (req, res) => {
@@ -33,8 +33,6 @@ exports.create = (req, res) => {
 };
 
 exports.planRecipes = (req, res) => {
-    console.log('request from planrecipes: ', req)
-
     const planRecipe = {
         planId: req.body.data.planId,
         recipeId: req.body.data.recipeId
@@ -43,12 +41,30 @@ exports.planRecipes = (req, res) => {
     PlanRecipes.create(planRecipe).then(function (data) {
         res.json(data)
     }).catch((err) => {
-        console.log('this is the err when creating Plan Recipes: ', err)
+        console.log('Error creating Plan Recipes: ', err)
         res.status(500).send({
             message: err.message || "Unable to create plan Recipes."
         });
     });
 }
+
+//find one plan with id route (include recipe data tied to this plan)
+exports.findOne = (req, res) => {
+    console.log('request for single plan get: ', req)
+    const id = req.params.planId;
+
+    Plan.findByPk(id, {include: [{model: Recipe}]}).then((data) => {
+        console.log('successfully found plan by PK')
+        res.send(data);
+    }).catch((err) => {
+        console.log('failed to find plan by PK')
+        res.status(500).send({
+            message: err.message || "Unable to retrieve plan with id=" + id
+        });
+    });
+};
+
+
 
 //retrieve all plans route -> modify to retrieve all plans for logged in user
 exports.findAll = (req, res) => {
@@ -61,23 +77,7 @@ exports.findAll = (req, res) => {
     })
 };
 
-// //find one plan with id route
-exports.findOne = (req, res) => {
-    const id = req.params.id;
 
-    Plan.findByPk(id).then((data) => {
-        res.send(data);
-    }).catch((err) => {
-        res.status(500).send({
-            message: "Unable to retrieve plan with id=" + id
-        });
-    });
-};
-
-// update plan by using id -> modify to update plan with user id if user decides to create account/login after plan is created
-// exports.update = (req, res) = -> {
-
-// }
 
 //Delete plan using id
 exports.delete = (req, res) => {
@@ -97,15 +97,13 @@ exports.delete = (req, res) => {
         }
     }).catch((err) => {
         res.status(500).send({
-            message: "Unable to delete plan with id=" + id
+            message: err.message || "Unable to delete plan with id=" + id
         });
     });
 };
 
 //Goal Routes:
-//create plan tied to current user
 //route to return most recent user plan (called on create plan page load) -> may not need w react
-// 
 
 
 

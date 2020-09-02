@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap'
 import SmallButton from '../../components/SmallButton'
 import DateTimePicker from '../../components/DateTimePicker'
 
-
 export default function PlanTimes(props) {
 
     let [step, setStep] = useState(0)
