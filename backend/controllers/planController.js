@@ -33,8 +33,14 @@ exports.create = (req, res) => {
 };
 
 exports.planRecipes = (req, res) => {
-    PlanRecipes.create(req.body, {
-    }).then(function (data) {
+    console.log('request from planrecipes: ', req)
+
+    const planRecipe = {
+        planId: req.body.data.planId,
+        recipeId: req.body.data.recipeId
+    }
+
+    PlanRecipes.create(planRecipe).then(function (data) {
         res.json(data)
     }).catch((err) => {
         console.log('this is the err when creating Plan Recipes: ', err)
