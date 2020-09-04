@@ -28,6 +28,10 @@ export default function CreatePlan() {
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
         if (step === 1) {
+
+            //make copy of startDate state
+            let startCopy = startDate
+
             //initialize start and end of plan
             let start = moment(startDate, 'YYYY-MM-DD')
             let end = moment(start).add(7, 'days')
@@ -43,7 +47,10 @@ export default function CreatePlan() {
                 start = newDate
 
                 //add to our plan times array as well (populate with empty time blocks)
-                planTimesCopy.push([[new Date(), new Date()]])
+                // planTimesCopy.push([[new Date(start), new Date(start)]])
+
+                //goal is to push start dates to the time array to act as placeholders
+                planTimesCopy.push([[startCopy, startCopy]])
             }
 
             //set state of plan dates to our new arr
@@ -80,7 +87,6 @@ export default function CreatePlan() {
         }).then(async () => {
             for (let recipe of planRecipes) {
                 await addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then(async (res) => {
-                    console.log('added new recipe: ', res)
 
                     //for each recipe added, create record using that recipe PLUS current plan ID to create many to many relationship in db
                     const planRecipeDetails = {
@@ -112,11 +118,13 @@ export default function CreatePlan() {
     const addTimeBox = async (dayStep) => {
         //shallow copy of times
         let timesCopy = [...planTimes]
+        //shallow copy of startDate
+        let startCopy = startDate
         //shallow copy of item to mutate
         let time = timesCopy[dayStep]
 
         //add default value
-        time.push([new Date(), new Date()])
+        time.push([startCopy, startCopy])
 
         //put timeslot back into original array
         timesCopy[dayStep] = time

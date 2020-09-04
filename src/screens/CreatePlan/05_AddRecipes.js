@@ -16,11 +16,9 @@ export default function AddRecipes(props) {
                 <Card.Img variant="top" src={recipe.image} />
                 <Card.Body>
                     <Card.Title>{recipe.title}</Card.Title>
-                    <Card.Text>
-                        Cuisines: {recipe.cuisines.join(', ') + '\n'}
-                        Cook Time: {recipe.readyInMinutes + '\n'}
-                        <a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">Link to Recipe</a>
-                    </Card.Text>
+                    <Card.Text>Cuisines: {recipe.cuisines.join(', ')}</Card.Text>
+                    <Card.Text>Total Time: {recipe.readyInMinutes} minutes</Card.Text>
+                    <Card.Text>{<a href={recipe.sourceUrl} target="_blank" rel="noopener noreferrer">Link to Recipe</a>}</Card.Text>
                     <Button variant="primary" recipedetails={JSON.stringify(recipe)} onClick={(e) => selectRecipe(e)}>Add to Plan</Button>
                 </Card.Body>
             </Card>

@@ -20,6 +20,9 @@ export default function SamplePlan(props) {
                 right: ''
             }}
             events={props.events}
-        />
+            allDaySlot={false}
+            slotMinTime="05:00:00"
+            // slotMaxTime="00:00:00"
+            />
     )
 }

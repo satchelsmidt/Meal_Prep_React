@@ -15,7 +15,6 @@ export function createPlan(
 }
 
 export function addPlanRecipes(data) {
-    console.log('data from plan recipes: ', data)
     return axiosPlansInstance.post('/plan_recipes', {
         data
     }).then((res) => ({ success: true, message: 'Successfully created new plan', data: res.data })).catch((res) => ({ success: false, message: res, data: res }))

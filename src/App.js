@@ -19,9 +19,6 @@ export default function App() {
   const [loggedIn, setLoggedIn] = useState(false)
   const [user, setUser] = useState(null)
 
-  // const [loggedIn, setLoggedIn] = useState(true)
-  // const [user, setUser] = useState(1)
-
   useEffect(() => {
 
     //if user is not logged in, check to see if session exists
@@ -43,7 +40,6 @@ export default function App() {
         }
       })
     }
-
   }, [loggedIn])
 
   const handleLogin = async (res) => {

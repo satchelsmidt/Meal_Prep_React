@@ -7,11 +7,8 @@ import { NavLink } from 'react-router-dom'
 
 export default function AllPlans() {
 
-    const [plansLoaded, setPlansLoaded] = useState(false)
     const [plans, setPlans] = useState(null)
-
     const auth = useContext(AuthContext)
-
 
     useEffect(() => {
         findAllUserPlans(auth.user).then((res) => {
@@ -25,7 +22,7 @@ export default function AllPlans() {
         })
     }, [])
 
-
+    //if plan data is still fetching
     if (plans === null) {
         return (
             <Container style={styles.formContainer}>
@@ -33,7 +30,7 @@ export default function AllPlans() {
             </Container>
         )
     }
-
+    //if user has not created any plans
     if (plans === false) {
         return (
             <Container style={styles.formContainer}>
@@ -44,13 +41,11 @@ export default function AllPlans() {
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>This is where you will view ALL RECIPE PLANS for user</p>
+            <p style={styles.p}>Here is where you can view all plans you have created</p>
             {plans.map((plan, index) => { return <NavLink to={'/single_plan/' + plan.id}><p key={index}>View Details for plan {plan.id}, from {JSON.parse(plan.planDates)[0]} to {JSON.parse(plan.planDates)[6]}</p></NavLink> })}
         </Container>
     );
 }
-
-
 
 const styles = {
     p: {

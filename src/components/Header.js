@@ -49,9 +49,10 @@ export default function Header() {
             <Navbar.Toggle aria-controls="basic-navbar-nav" />
             <Navbar.Collapse id="basic-navbar-nav">
                 <Nav className="ml-auto">
-                    <LinkContainer to="/sample">
+                    {/* TODO: Reinstate the sample plan page */}
+                    {/* <LinkContainer to="/sample">
                         <Nav.Link>View Sample Plan</Nav.Link>
-                    </LinkContainer >
+                    </LinkContainer > */}
                     <NavDropdown title="Account" id="basic-nav-dropdown">
                         <LinkContainer to="/login">
                             <NavDropdown.Item>Login</NavDropdown.Item>
@@ -72,6 +73,7 @@ export default function Header() {
 
 const styles = {
     navbar: {
-        'marginTop': '5%'
+        'opacity': '.9',
+        'background': '#EDF5FC'
     }
 }

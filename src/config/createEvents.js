@@ -10,8 +10,6 @@ export const createEvents=(data, recipes)=> {
     let events = []
     let recipeTitles = recipes.map(recipe => {return recipe.recipe_title})
 
-    console.log('hopefully arr of recipe titles: ', recipeTitles)
-
         for (let i = 0; i < Object.keys(data).length; i++) {
 
             let currentDay = data[i]
@@ -29,7 +27,7 @@ export const createEvents=(data, recipes)=> {
                             let startTime = copyStart
                             let endTime = copyEnd
                             let event = {
-                                title: recipeTitles.shift(),
+                                title: 'Time to cook: ' + recipeTitles.shift() || 'No recipe for this time slot',
                                 start: startTime,
                                 end: endTime
                             }
@@ -180,6 +178,5 @@ export const createEvents=(data, recipes)=> {
                     break
             }
         }
-        console.log('our events array: ', events)
         return events
 }
