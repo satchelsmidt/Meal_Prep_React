@@ -24,3 +24,7 @@ export function addPlanRecipes(data) {
 export function findSinglePlan(id) {
     return axiosPlansInstance.get('/single_plan/' + id).then((res) => ({ success: true, message: 'Found plan by ID', data: res.data })).catch((res) => ({ success: false, message: res, data: res }))
 }
+
+export function findAllUserPlans(id) {
+    return axiosPlansInstance.get('/all_plans/' + id).then((res) => ({ success: true, message: 'Found all plans for current user', data: res.data })).catch((res) => ({ success: false, message: res, data: res }))
+}

@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap'
 import recipeSearch from '../../api/recipeSearch'
 import SmallButton from '../../components/SmallButton'
-import { NavLink } from 'react-router-dom'
 
 export default function AddRecipes(props) {
 
@@ -58,8 +57,6 @@ export default function AddRecipes(props) {
         })
     }, [page])
 
-    let planId = 1
-
     return (
         <Container style={styles.formContainer}>
             <p style={styles.p}>These are some recipes that fit what you're looking for. </p>
@@ -72,9 +69,7 @@ export default function AddRecipes(props) {
                 {currentOffset > 0 && <SmallButton text="Previous" onClick={(e) => { renderPrevPage(e) }} />}
                 <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
             </Container>
-            {/* <NavLink to={`/single_plan/${planId}`}> */}
-                <SmallButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></SmallButton>
-            {/* </NavLink> */}
+            <SmallButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></SmallButton>
         </Container>
     );
 }

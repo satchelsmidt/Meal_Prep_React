@@ -16,7 +16,7 @@ export default function recipeSearch(cuisines, intolerances, diet, offset) {
             cuisine: cuisinesString,
             intolerances: intolerancesString,
             diet: dietString,
-            number: 2,
+            number: 1,
             offset: offset,
             sort: "popularity",
             addRecipeInformation: true,

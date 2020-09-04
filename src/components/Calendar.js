@@ -3,22 +3,23 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 
-export default function Calendar(props) {
+
+export default function SamplePlan(props) {
+
     return (
-        // <Container style={styles.calendarContainer}>
-            <FullCalendar
-                plugins={[dayGridPlugin, timeGridPlugin]}
-                initialView="timeGrid"
-                visibleRange={{
-                    start: props.startDate,
-                    end: props.endDate,
-                }}
-                header={{
-                    left: '',
-                    center: 'title',
-                    right: ''
-                }}
-            />
-        // </ Container>
+        <FullCalendar
+            plugins={[dayGridPlugin, timeGridPlugin]}
+            initialView="timeGrid"
+            visibleRange={{
+                start: props.startDate,
+                end: props.endDate,
+            }}
+            headerToolbar={{
+                left: '',
+                center: 'title',
+                right: ''
+            }}
+            events={props.events}
+        />
     )
 }

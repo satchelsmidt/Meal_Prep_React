@@ -10,6 +10,8 @@ exports.create = (req, res) => {
     //validate request
     //include if statement for content of plan
 
+    console.log('this is our plan data stored: ', req.body)
+
     //create plan
     const plan = {
         userId: req.body.userId,
@@ -53,7 +55,7 @@ exports.findOne = (req, res) => {
     console.log('request for single plan get: ', req)
     const id = req.params.planId;
 
-    Plan.findByPk(id, {include: [{model: Recipe}]}).then((data) => {
+    Plan.findByPk(id, { include: [{ model: Recipe }] }).then((data) => {
         console.log('successfully found plan by PK')
         res.send(data);
     }).catch((err) => {
@@ -62,6 +64,22 @@ exports.findOne = (req, res) => {
             message: err.message || "Unable to retrieve plan with id=" + id
         });
     });
+};
+
+//find all plans for logged in user (based on id)
+exports.findAll = (req, res) => {
+    console.log('request for all plans get: ', req)
+    const id = req.params.userId;
+
+    Plan.findAll(
+        { where: { UserId: id } }).then((data) => {
+            res.send(data);
+        }).catch((err) => {
+            console.log('failed to retrieve user plans')
+            res.status(500).send({
+                message: err.message || "Unable to retrieve user plans"
+            })
+        });
 };
 
 

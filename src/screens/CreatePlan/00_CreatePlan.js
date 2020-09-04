@@ -59,15 +59,27 @@ export default function CreatePlan() {
 
         console.log('submitting form...')
 
+        let planTimesObject = {}
+
+        for (let i = 0; i < planTimes.length; i++) {
+
+            planTimesObject[i] = {}
+            let currentDay = planTimes[i]
+
+            for (let timeSlot of currentDay) {
+                planTimesObject[i][timeSlot[0].toString()] = timeSlot[1].toString()
+            }
+        }
+
         //TODO: Consolidate this data into object, change states to single object with these details in it
-        createPlan(auth.user, startDate, planDates, planTimes, planCuisines, planIntolerances, planDiets).then((res) => {
+        createPlan(auth.user, startDate, planDates, planTimesObject, planCuisines, planIntolerances, planDiets).then((res) => {
 
             console.log('plan created')
             planId = res.data.id
 
         }).then(async () => {
             for (let recipe of planRecipes) {
-                await addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then( async (res) => {
+                await addRecipes(recipe.title, recipe.image, recipe.sourceUrl, recipe.cuisines, recipe.cookingMinutes, recipe.preparationMinutes, recipe.readyInMinutes, recipe.servings, recipe.extendedIngredients, recipe.analyzedInstructions).then(async (res) => {
                     console.log('added new recipe: ', res)
 
                     //for each recipe added, create record using that recipe PLUS current plan ID to create many to many relationship in db
@@ -83,10 +95,6 @@ export default function CreatePlan() {
             //TODO: include navigation to correct URL at this point
             history.push("/single_plan/" + planId);
         })
-
-        // }).catch((err) => {
-        //     console.log(err)
-        // })
     }
 
     const prevStep = () => {

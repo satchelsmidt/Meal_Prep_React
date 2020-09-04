@@ -12,7 +12,9 @@ module.exports = app => {
     //Return plan that matches id in url
     router.get("/single_plan/:planId", plans.findOne)
 
-
+    //Return plan that matches id in url
+    router.get("/all_plans/:userId", plans.findAll)
+    
 
 
     //Current Plan
