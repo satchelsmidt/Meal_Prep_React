@@ -10,9 +10,9 @@ export default function Header() {
 
     const handleLogout = () => {
         logout()
-        .then((res)=>{
-            auth.handleLogin(res.success)
-        })
+            .then((res) => {
+                auth.handleLogin(res.success)
+            })
     }
 
     //IF USER IS LOGGED IN
@@ -61,9 +61,10 @@ export default function Header() {
                             <NavDropdown.Item>Sign Up</NavDropdown.Item>
                         </LinkContainer >
                         <NavDropdown.Divider />
-                        <LinkContainer to="/password">
+                        {/* TODO: implement feature to allow user to change password */}
+                        {/* <LinkContainer to="/password">
                             <NavDropdown.Item>Forgot Password?</NavDropdown.Item>
-                        </LinkContainer >
+                        </LinkContainer > */}
                     </NavDropdown>
                 </Nav>
             </Navbar.Collapse>

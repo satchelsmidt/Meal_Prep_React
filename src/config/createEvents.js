@@ -6,177 +6,177 @@ Date.prototype.addDays = function (days) {
     return date;
 }
 
-export const createEvents=(data, recipes)=> {
+export const createEvents = (data, recipes) => {
     let events = []
-    let recipeTitles = recipes.map(recipe => {return recipe.recipe_title})
+    let recipeTitles = recipes.map(recipe => { return recipe.recipe_title })
 
-        for (let i = 0; i < Object.keys(data).length; i++) {
+    for (let i = 0; i < Object.keys(data).length; i++) {
 
-            let currentDay = data[i]
+        let currentDay = data[i]
 
-            switch (i) {
-                case 0:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+        switch (i) {
+            case 0:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(0)
-                            let copyEnd = endTimeDate.addDays(0)
+                        let copyStart = startTimeDate.addDays(0)
+                        let copyEnd = endTimeDate.addDays(0)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: 'Time to cook: ' + recipeTitles.shift() || 'No recipe for this time slot',
-                                start: startTime,
-                                end: endTime
-                            }
-
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: 'Time to cook: ' + recipeTitles.shift() || 'No recipe for this time slot',
+                            start: startTime,
+                            end: endTime
                         }
+
+                        events.push(event)
                     }
-                    break
-                case 1:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 1:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(1)
-                            let copyEnd = endTimeDate.addDays(1)
+                        let copyStart = startTimeDate.addDays(1)
+                        let copyEnd = endTimeDate.addDays(1)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 2:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 2:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(2)
-                            let copyEnd = endTimeDate.addDays(2)
+                        let copyStart = startTimeDate.addDays(2)
+                        let copyEnd = endTimeDate.addDays(2)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 3:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 3:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(3)
-                            let copyEnd = endTimeDate.addDays(3)
+                        let copyStart = startTimeDate.addDays(3)
+                        let copyEnd = endTimeDate.addDays(3)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 4:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 4:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(4)
-                            let copyEnd = endTimeDate.addDays(4)
+                        let copyStart = startTimeDate.addDays(4)
+                        let copyEnd = endTimeDate.addDays(4)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 5:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 5:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(5)
-                            let copyEnd = endTimeDate.addDays(5)
+                        let copyStart = startTimeDate.addDays(5)
+                        let copyEnd = endTimeDate.addDays(5)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 6:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 6:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(6)
-                            let copyEnd = endTimeDate.addDays(6)
+                        let copyStart = startTimeDate.addDays(6)
+                        let copyEnd = endTimeDate.addDays(6)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-                case 7:
-                    for (let timeSlot in currentDay) {
-                        if (timeSlot !== currentDay[timeSlot]) {
-                            let startTimeDate = new Date(timeSlot)
-                            let endTimeDate = new Date(currentDay[timeSlot])
+                }
+                break
+            case 7:
+                for (let timeSlot in currentDay) {
+                    if (timeSlot !== currentDay[timeSlot]) {
+                        let startTimeDate = new Date(timeSlot)
+                        let endTimeDate = new Date(currentDay[timeSlot])
 
-                            let copyStart = startTimeDate.addDays(7)
-                            let copyEnd = endTimeDate.addDays(7)
+                        let copyStart = startTimeDate.addDays(7)
+                        let copyEnd = endTimeDate.addDays(7)
 
-                            let startTime = copyStart
-                            let endTime = copyEnd
-                            let event = {
-                                title: recipeTitles.shift(),
-                                start: startTime,
-                                end: endTime
-                            }
-                            events.push(event)
+                        let startTime = copyStart
+                        let endTime = copyEnd
+                        let event = {
+                            title: recipeTitles.shift(),
+                            start: startTime,
+                            end: endTime
                         }
+                        events.push(event)
                     }
-                    break
-            }
+                }
+                break
         }
-        return events
+    }
+    return events
 }

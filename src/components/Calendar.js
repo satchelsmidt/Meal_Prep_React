@@ -3,7 +3,6 @@ import FullCalendar from '@fullcalendar/react'
 import dayGridPlugin from '@fullcalendar/daygrid'
 import timeGridPlugin from '@fullcalendar/timegrid'
 
-
 export default function SamplePlan(props) {
 
     return (
@@ -22,7 +21,6 @@ export default function SamplePlan(props) {
             events={props.events}
             allDaySlot={false}
             slotMinTime="05:00:00"
-            // slotMaxTime="00:00:00"
-            />
+        />
     )
 }

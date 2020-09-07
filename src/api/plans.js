@@ -1,8 +1,6 @@
 import { axiosPlansInstance } from '../config/axios'
 
-export function createPlan(
-    user,
-    start, dates, times, cuisines, intolerances, diets, recipes) {
+export function createPlan(user, start, dates, times, cuisines, intolerances, diets, recipes) {
     return axiosPlansInstance.post('/create_plan', {
         userId: user,
         startDate: start,
