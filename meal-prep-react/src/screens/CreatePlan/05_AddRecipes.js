@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Container, Card, Button } from 'react-bootstrap'
+import React, { useEffect, useState } from '../../../node_modules/@types/react';
+import { Container, Card, Button } from '../../../node_modules/react-bootstrap/esm'
 import recipeSearch from '../../api/recipeSearch'
 import SmallButton from '../../components/SmallButton'
 

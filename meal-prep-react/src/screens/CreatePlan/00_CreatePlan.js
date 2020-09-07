@@ -1,15 +1,15 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { Container } from 'react-bootstrap'
+import React, { useState, useEffect, useContext } from '../../../node_modules/@types/react';
+import { Container } from '../../../node_modules/react-bootstrap/esm'
 import PlanStart from './01_PlanStart'
 import PlanTimes from './02_PlanTimes'
 import RecipeTypes from './03_RecipeTypes'
 import RecipeRestrictions from './04_RecipeRestrictions'
-import moment from 'moment';
+import moment from '../../../node_modules/moment/ts3.1-typings/moment';
 import AddRecipes from './05_AddRecipes'
 import { createPlan, addPlanRecipes } from '../../api/plans'
 import { AuthContext } from '../../AuthContext'
 import { addRecipes } from '../../api/recipes';
-import { useHistory } from "react-router-dom";
+import { useHistory } from "../../../node_modules/react-router-dom";
 
 export default function CreatePlan() {
 

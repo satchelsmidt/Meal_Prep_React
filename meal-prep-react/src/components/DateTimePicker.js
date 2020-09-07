@@ -1,9 +1,9 @@
-import React from 'react';
-import { Container } from 'react-bootstrap'
-import moment from 'moment';
-import { ArrowRightSquareFill, ArrowLeftSquareFill } from 'react-bootstrap-icons'
+import React from '../../node_modules/@types/react';
+import { Container } from '../../node_modules/react-bootstrap/esm'
+import moment from '../../node_modules/moment/ts3.1-typings/moment';
+import { ArrowRightSquareFill, ArrowLeftSquareFill } from '../../node_modules/react-bootstrap-icons/dist'
 import TimeRange from './TimeRange'
-import { Button } from 'react-bootstrap'
+import { Button } from '../../node_modules/react-bootstrap/esm'
 
 export default function DateTimePicker(props) {
 

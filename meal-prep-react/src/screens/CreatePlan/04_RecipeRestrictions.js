@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Dropdown } from 'react-bootstrap'
+import React from '../../../node_modules/@types/react';
+import { Container, Dropdown } from '../../../node_modules/react-bootstrap/esm'
 import SmallButton from '../../components/SmallButton'
 import * as Restrictions from '../../config/restrictions.json'
 
