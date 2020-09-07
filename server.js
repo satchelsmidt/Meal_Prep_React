@@ -61,9 +61,9 @@ require("./routes/recipeRoutes")(app)
 
 //Include logic to handle deployed app, link index.html to server
 // if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../meal-prep-react/build')));
+  app.use(express.static(path.join(__dirname, 'meal-prep-react/build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../meal-prep-react/build/index.html'));
+    res.sendFile(path.join(__dirname, 'meal-prep-react/build/index.html'));
   });
   // app.get('*', (req, res) => {
   //   res.sendFile(path.join(__dirname, '../meal-prep-react/build', 'index.html'));
