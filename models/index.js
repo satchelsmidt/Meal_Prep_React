@@ -1,18 +1,17 @@
-const dbConfig = require("../config/db/config");
+// const dbConfig = require("../config/db/config");
 
 //import + initialize Sequelize using config params
 const Sequelize = require("sequelize");
 
-//TODO: make this work when you deploy
-// const env = process.env.NODE_ENV || 'development';
-// const deployConfig = require(__dirname + '/../config/config.json')[env];
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = require('../config/db/config')[env];
 
-// let sequelize;
+let sequelize;
 
-// if (deployConfig.use_env_variable) {
-//   sequelize = new Sequelize(process.env[config.use_env_variable], config);
-// } else {
-const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+if (dbConfig.use_env_variable) {
+  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], dbConfig);
+} else {
+sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
     operatorsAliases: false,
@@ -23,7 +22,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
         idle: dbConfig.pool.idle
     }
 });
-// }
+}
 
 const db = {};
 
