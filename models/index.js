@@ -1,5 +1,3 @@
-// const dbConfig = require("../config/db/config");
-
 //import + initialize Sequelize using config params
 const Sequelize = require("sequelize");
 
@@ -8,20 +6,21 @@ const dbConfig = require('../config/db/config')[env];
 
 let sequelize;
 
+//Check if in prod env
 if (dbConfig.use_env_variable) {
-  sequelize = new Sequelize(process.env[dbConfig.use_env_variable], dbConfig);
+    sequelize = new Sequelize(process.env[dbConfig.use_env_variable], dbConfig);
 } else {
-sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
-    host: dbConfig.HOST,
-    dialect: dbConfig.dialect,
-    operatorsAliases: false,
-    pool: {
-        max: dbConfig.pool.max,
-        min: dbConfig.pool.min,
-        acquire: dbConfig.pool.acquire,
-        idle: dbConfig.pool.idle
-    }
-});
+    sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
+        host: dbConfig.HOST,
+        dialect: dbConfig.dialect,
+        operatorsAliases: false,
+        pool: {
+            max: dbConfig.pool.max,
+            min: dbConfig.pool.min,
+            acquire: dbConfig.pool.acquire,
+            idle: dbConfig.pool.idle
+        }
+    });
 }
 
 const db = {};
@@ -36,11 +35,10 @@ db.recipes = require("./recipe")(sequelize, Sequelize)
 db.recipe_plans = require("./recipePlan")(sequelize, Sequelize)
 
 //Create associations between data models
-db.users.hasMany(db.plans,
-    {
-        as: 'plans',
-        onDelete: "cascade"
-    });
+db.users.hasMany(db.plans, {
+    as: 'plans',
+    onDelete: "cascade"
+});
 db.plans.belongsTo(db.users, {
     foreignKey: 'userId',
     as: 'user'

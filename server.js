@@ -16,9 +16,14 @@ const app = express();
 
 //use Sequelize db
 const db = require("./models");
-db.sequelize.sync({ force: true }).then(() => {
-  console.log('dropped and synced db')
-});
+
+//Optional feature to drop and sync db on server restart (for testing)
+// if(!process.env.NODE_ENV === 'production'){
+//   db.sequelize.sync({ force: true }).then(() => {
+//     console.log('dropped and synced db')
+//   });
+// }
+
 
 //TODO: add logic to enable/disable certain cors settings based on dev/prod environment
 // const domains = ["http://localhost:3000", "http://localhost:8080/"]
@@ -59,16 +64,15 @@ require("./routes/planRoutes")(app)
 require("./routes/authRoutes")(app)
 require("./routes/recipeRoutes")(app)
 
-//Include logic to handle deployed app, link index.html to server
-// if (process.env.NODE_ENV === 'production') {
+//Logic for routing deployed app
+if (process.env.NODE_ENV === 'production') {
   app.use(express.static(path.join(__dirname, 'meal-prep-react/build')));
   app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'meal-prep-react/build/index.html'));
   });
-  // app.get('*', (req, res) => {
-  //   res.sendFile(path.join(__dirname, '../meal-prep-react/build', 'index.html'));
-  // });
-// }
+}
+
+//logic for handling dev app
 // else{
   // app.use(express.static(path.join(__dirname, 'build')));
 //   app.get('*', (req, res) => {
