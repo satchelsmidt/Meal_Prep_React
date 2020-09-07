@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from '../../node_modules/@types/react';
-import { Container } from '../../node_modules/react-bootstrap/esm'
-import DatePicker from '../../node_modules/react-datepicker/dist'
-import "./node_modules/react-datepicker/dist/react-datepicker.css";
+import React, { useState, useEffect } from 'react';
+import { Container } from 'react-bootstrap'
+import DatePicker from 'react-datepicker'
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function TimeRange(props) {
 

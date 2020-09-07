@@ -59,13 +59,22 @@ require("./routes/planRoutes")(app)
 require("./routes/authRoutes")(app)
 require("./routes/recipeRoutes")(app)
 
-//Include logic to handle deployed app, link indes.html to server
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, 'build')));
+//Include logic to handle deployed app, link index.html to server
+// if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../meal-prep-react/build')));
   app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+    res.sendFile(path.join(__dirname, '../meal-prep-react/build/index.html'));
   });
-}
+  // app.get('*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, '../meal-prep-react/build', 'index.html'));
+  // });
+// }
+// else{
+  // app.use(express.static(path.join(__dirname, 'build')));
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.join(__dirname, '../meal-prep-react/public/index.html'));
+//   });
+// }
 
 //initialize PORT var, set app listener
 const PORT = process.env.PORT || 3000;

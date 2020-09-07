@@ -1,5 +1,5 @@
-import React, { useState } from '../../../node_modules/@types/react';
-import { Container } from '../../../node_modules/react-bootstrap/esm'
+import React, { useState } from 'react';
+import { Container } from 'react-bootstrap'
 import SmallButton from '../../components/SmallButton'
 import DateTimePicker from '../../components/DateTimePicker'
 

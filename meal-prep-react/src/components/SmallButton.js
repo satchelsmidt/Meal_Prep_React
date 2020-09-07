@@ -1,5 +1,5 @@
-import React from '../../node_modules/@types/react';
-import Button from '../../node_modules/react-bootstrap/esm/Button'
+import React from 'react';
+import Button from 'react-bootstrap/esm/Button'
 
 export default function SmallButton(props) {
 

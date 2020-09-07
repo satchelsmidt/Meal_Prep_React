@@ -1,7 +1,7 @@
-import React from '../../node_modules/@types/react'
-import FullCalendar from '../../node_modules/@fullcalendar/react/dist/main'
-import dayGridPlugin from '../../node_modules/@fullcalendar/daygrid/main'
-import timeGridPlugin from '../../node_modules/@fullcalendar/timegrid/main'
+import React from 'react'
+import FullCalendar from '@fullcalendar/react'
+import dayGridPlugin from '@fullcalendar/daygrid'
+import timeGridPlugin from '@fullcalendar/timegrid'
 
 export default function SamplePlan(props) {
 

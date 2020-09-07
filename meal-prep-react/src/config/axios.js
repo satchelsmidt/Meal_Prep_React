@@ -1,4 +1,4 @@
-import axios from '../../node_modules/axios';
+import axios from 'axios';
 
 export const axiosFoodInstance = axios.create({
     baseURL: "https://api.spoonacular.com/recipes/complexSearch",

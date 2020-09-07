@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useContext } from '../../node_modules/@types/react';
-import { Container } from '../../node_modules/react-bootstrap/esm'
+import React, { useState, useEffect, useContext } from 'react';
+import { Container } from 'react-bootstrap'
 import { findAllUserPlans } from '../api/plans'
 import { AuthContext } from '../AuthContext'
-import { NavLink } from '../../node_modules/react-router-dom'
+import { NavLink } from 'react-router-dom'
 
 
 export default function AllPlans() {
