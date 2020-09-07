@@ -5,11 +5,11 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "client-install": "npm install --prefix client",
-    "client": "npm start --prefix client",
+    "client-install": "npm install --prefix meal-prep-react",
+    "meal-prep-react": "npm start --prefix meal-prep-react",
     "server": "nodemon server.js",
     "start": "node server.js",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild":"NPM_CONFIG_PRODUCTION=false npm install --prefix meal-prep-react && npm run build --prefix meal-prep-react"
   },
   "author": "",
   "license": "ISC",
