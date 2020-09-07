@@ -17,30 +17,72 @@ const app = express();
 //use Sequelize db
 const db = require("./models");
 
-//Optional feature to drop and sync db on server restart (for testing)
-// if(!process.env.NODE_ENV === 'production'){
-//   db.sequelize.sync({ force: true }).then(() => {
-//     console.log('dropped and synced db')
-//   });
+let corsOptions
+// = {
+//   credentials: true,
+//   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
 // }
+// }
+
+
+//Optional feature to drop and sync db on server restart (for testing)
+if (process.env.NODE_ENV !== 'production') {
+  console.log('this happened')
+  db.sequelize.sync({ force: true }).then(() => {
+    console.log('dropped and synced db')
+  });
+
+  const domains = ["http://localhost:3000", "http://localhost:8080"]
+
+  corsOptions = {
+    origin: function (origin, callback) {
+      if (domains.indexOf(origin) !== -1) {
+        callback(null, true)
+      } else {
+        callback(new Error('Not allowed by CORS'))
+      }
+    },
+    credentials: true,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+  }
+}
+else{
+  corsOptions = {
+    // origin: function (origin, callback) {
+    //   if (domains.indexOf(origin) !== -1) {
+    //     callback(null, true)
+    //   } else {
+    //     console.log('this is origin: ', origin)
+    //     console.log('this is callback: ', callback)
+    //     callback(new Error('Not allowed by CORS'))
+    //   }
+    // },
+    credentials: true,
+    allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+  }
+}
 
 
 //TODO: add logic to enable/disable certain cors settings based on dev/prod environment
 // const domains = ["http://localhost:3000", "http://localhost:8080/"]
 
-var corsOptions = {
-  // origin: function (origin, callback) {
-  //   if (domains.indexOf(origin) !== -1) {
-  //     callback(null, true)
-  //   } else {
-  //     console.log('this is origin: ', origin)
-  //     console.log('this is callback: ', callback)
-  //     callback(new Error('Not allowed by CORS'))
-  //   }
-  // },
-  credentials: true,
-  allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
-}
+// let corsOptions
+
+// if(!)
+
+// corsOptions = {
+//   // origin: function (origin, callback) {
+//   //   if (domains.indexOf(origin) !== -1) {
+//   //     callback(null, true)
+//   //   } else {
+//   //     console.log('this is origin: ', origin)
+//   //     console.log('this is callback: ', callback)
+//   //     callback(new Error('Not allowed by CORS'))
+//   //   }
+//   // },
+//   credentials: true,
+//   allowedHeaders: ["Origin", "X-Requested-With", "Content-Type", "Accept"]
+// }
 
 //enable cors for all requests
 app.use(cors(corsOptions));
@@ -74,14 +116,15 @@ if (process.env.NODE_ENV === 'production') {
 
 //logic for handling dev app
 // else{
-  // app.use(express.static(path.join(__dirname, 'build')));
+// app.use(express.static(path.join(__dirname, 'build')));
 //   app.get('*', (req, res) => {
 //     res.sendFile(path.join(__dirname, '../meal-prep-react/public/index.html'));
 //   });
 // }
 
 //initialize PORT var, set app listener
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
+  console.log(`current app environment: ${process.env.NODE_ENV}`)
   console.log(`Server running on port ${PORT}`)
 });
