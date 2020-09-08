@@ -65,7 +65,7 @@ export default function Plan() {
 
                 <Container style={styles.contentContainer}>
                     <Container style={styles.outerCardContainer}>
-                        <h3 style={styles.cardHeader}>This week's recipes</h3>
+                        <h3 style={styles.cardHeader}>This week's recipes:</h3>
                         <Container style={styles.innerCardContainer}>
                             {planData.recipes.map((recipe, index) => {
                                 return <Card style={styles.recipeCard} key={index}>
@@ -134,6 +134,7 @@ const styles = {
     },
     contentContainer: {
         'display': 'flex',
+        'margin': '20px'
     },
     recipeCard: {
         'padding': '10px',
@@ -159,7 +160,7 @@ const styles = {
         'padding': '5px 10px',
         'display': 'inline-block',
         'borderRadius': '25px',
-        'margin': '0px',
+        'margin': '20px',
         'color': 'white',
     },
     planHeader: {

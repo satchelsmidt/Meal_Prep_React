@@ -1,8 +1,7 @@
 import React from 'react';
-import { Container, Dropdown } from 'react-bootstrap'
+import { Container, Dropdown, Badge } from 'react-bootstrap'
 import SmallButton from '../../components/SmallButton'
 import * as Cuisines from '../../config/cuisines.json'
-
 
 export default function RecipeTypes(props) {
 
@@ -28,20 +27,18 @@ export default function RecipeTypes(props) {
 
     const renderCuisineButtons = () => {
         return props.cuisines.map((cuisine, index) => {
-            return <SmallButton key={index} text={cuisine}></SmallButton>
+            return <Badge key={index} variant="primary" style={styles.badgeStyle}>{cuisine}</Badge>
         })
     }
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>Now that we have the days and times for your plan figured out, let's look for some recipes</p>
-            <p style={styles.p}>First, choose the type(s) of cuisine you want to cook:</p>
+            <p style={styles.text}>Now that we have the days and times for your plan figured out, let's look for some recipes</p>
+            <p style={styles.text}>First, choose the type(s) of cuisine you want to cook:</p>
             <Container style={styles.innerContainer}>
                 <Container style={styles.innerInnerContainer}>
                     <Dropdown >
-                        <Dropdown.Toggle variant="success" id="dropdown-basic"
-                            style={styles.dropdown}
-                        >
+                        <Dropdown.Toggle variant="success" id="dropdown-basic" style={styles.dropdown}>
                             Cuisines
                         </Dropdown.Toggle>
                         <Dropdown.Menu>
@@ -56,14 +53,16 @@ export default function RecipeTypes(props) {
                     {renderCuisineButtons()}
                 </Container>
             </Container>
-            <SmallButton text="Back" onClick={() => { props.prevStep() }}></SmallButton>
-            <SmallButton text="Next" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
+            <Container style={styles.rowContainer}>
+                <SmallButton text="Previous Step" onClick={() => { props.prevStep() }}></SmallButton>
+                <SmallButton text="Next Step" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
+            </Container>
         </Container>
     );
 }
 
 const styles = {
-    p: {
+    text: {
         'textAlign': 'center',
         'color': 'white'
     },
@@ -72,13 +71,16 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px'
+        'width': '60%',
+        'margin': '75px',
+        'padding': '20px'
     },
     innerContainer: {
         'display': 'flex',
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'space-between',
+        'margin': '10px'
     },
     innerInnerContainer: {
         'display': 'flex',
@@ -87,9 +89,19 @@ const styles = {
         'justifyContent': 'center',
         'width': '50%',
         'margin': '0',
-        'padding': '0'
+        'padding': '0',
+        'flexWrap': 'wrap'
     },
     dropdown: {
         'width': '200px'
+    },
+    rowContainer: {
+        'display': 'flex',
+        'flexDirection': 'row',
+        'alignItems': 'center',
+        'justifyContent': 'space-around',
+    },
+    badgeStyle:{
+        'margin': '5px'
     }
 }

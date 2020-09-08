@@ -253,16 +253,12 @@ export default function CreatePlan() {
 }
 
 const styles = {
-    p: {
-        'color': 'black'
-    },
     contentContainer: {
         'display': 'flex',
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
         'height': 'auto',
-        'marginBottom': '200px',
         'overflow': 'auto'
     }
 }

@@ -1,4 +1,5 @@
 //This is required because apparently neither moment.js nor the native JS date object allow for the adding of variable amounts of days. Will reformat time input to be correct at a later date.
+// import moment from 'moment'
 
 /*eslint no-extend-native: ["error", { "exceptions": ["Date"] }]*/
 Date.prototype.addDays = function (days) {
@@ -10,6 +11,7 @@ Date.prototype.addDays = function (days) {
 export const createEvents = (data, recipes) => {
     let events = []
     let recipeTitles = recipes.map(recipe => { return recipe.recipe_title })
+    // let recipeTimes = recipes.map(recipe => { return recipe.recipe_total_time })
 
     for (let i = 0; i < Object.keys(data).length; i++) {
 
@@ -27,8 +29,25 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        //TODO: add logic to place events more accurately
+                        //required logic: 
+                        //find diff between start and end of timeslot. 
+                        //loop through recipetimes and grab first one that fits within slot
+                        //slice recipetitles index at same spot as times (should be same)
+                        //include time and title in description
+
+                        // let momentStart = moment(startTime)
+                        // let momentEnd = moment(endTime)
+
+                        // let totalTime = momentEnd.diff(momentStart, 'minutes')
+
+                        // console.log('this is the total time of first slot: ', totalTime)
+                        // console.log('this is the total cook time of first recipe: ', recipeTimes.shift())
+
                         let event = {
                             title: 'Time to cook: ' + recipeTitles.shift() || 'No recipe for this time slot',
+                            description: 'Time to cook ' + recipeTitles.shift() || 'No recipe for this time slot',
                             start: startTime,
                             end: endTime
                         }

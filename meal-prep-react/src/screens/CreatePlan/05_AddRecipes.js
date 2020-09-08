@@ -56,23 +56,23 @@ export default function AddRecipes(props) {
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>These are some recipes that fit what you're looking for. </p>
+            <p style={styles.text}>Here are some recipes that fit what you're looking for.</p>
+            <p style={styles.text}>Search through the results and add your favorites you to your final plan!</p>
             <br></br>
-            <p style={styles.p}>This is where you can add the recipes you'd like to cook to your final prep plan!</p>
             <Container style={styles.cardContainer}>
                 {renderRecipes()}
             </Container>
             <Container style={styles.buttonsContainer}>
-                {currentOffset > 0 && <SmallButton text="Previous" onClick={(e) => { renderPrevPage(e) }} />}
-                <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
+                {currentOffset > 0 && <SmallButton text="View Previous Recipes" onClick={(e) => { renderPrevPage(e) }} />}
+                <SmallButton text="View More Recipes" onClick={(e) => { renderNewPage(e) }}></SmallButton>
             </Container>
-            <BigButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></BigButton>
+            <BigButton text="Create Final Plan" onClick={() => { props.handleFormSubmit() }}></BigButton>
         </Container>
     );
 }
 
 const styles = {
-    p: {
+    text: {
         'textAlign': 'center',
         'color': 'white'
     },
@@ -84,14 +84,14 @@ const styles = {
         'justifyContent': 'center',
         'overflow': 'auto',
         'height': 'auto',
+        'margin': '75px',
+        'padding': '20px'
     },
     cardContainer: {
         'display': 'flex',
         'flexWrap': 'wrap',
         'flexDirection': 'row',
         'alignItems': 'center',
-        'justifyContent': 'space-between',
-        'overflow': 'auto',
         'height': 'auto',
     },
     buttonsContainer: {
@@ -99,6 +99,7 @@ const styles = {
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'center',
+        'margin': '20px'
     },
     recipeCard: {
         'padding': '10px',
