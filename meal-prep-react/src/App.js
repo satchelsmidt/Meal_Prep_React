@@ -81,7 +81,6 @@ const styles = {
     'background': '#5D737E',
     'opacity': '.90',
     'padding': '20px 10px',
-    // 'height': 'auto',
     'position': 'relative',
     'minHeight': '100%'
   },

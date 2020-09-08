@@ -1,19 +1,24 @@
 import React from 'react';
 import { Container } from 'react-bootstrap'
 import BigButton from '../components/BigButton'
-import { NavLink } from 'react-router-dom'
+import { useHistory } from "react-router-dom";
+
 
 export default function Main() {
+
+    const history = useHistory();
+
+    const handleButtonPress = () => {
+        history.push("/create");
+    }
+
     return (
         <Container style={styles.formContainer}>
             <h5 style={styles.text}>Welcome to Preppy!</h5>
-
             <p style={styles.text}>Prepping your meals ahead of time is a great way to eat healthier, save money, and organize your time -- but getting started can be tricky.</p>
-
             <p style={styles.text}> This tool will help you create a weeklong meal plan that fits <strong>your</strong> schedule, with recipes that work with your dietary needs and preferences.</p>
-
             <p style={styles.text}>Click 'Create Plan' to get started!</p>
-            <NavLink to="/create"><BigButton text="Create Plan"></BigButton></NavLink>
+            <BigButton text="Create Plan" onClick={() => handleButtonPress()}></BigButton>
         </Container>
     );
 }

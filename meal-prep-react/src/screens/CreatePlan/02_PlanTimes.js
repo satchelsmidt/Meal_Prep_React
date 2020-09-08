@@ -112,8 +112,8 @@ export default function PlanTimes(props) {
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.text}>Now select the times you are available to cook on each day of your plan</p>
-            <p style={styles.text}>(Click the arrow next to the date to cycle through the days of your plan)</p>
+            <p style={styles.text}>Select the times you are available to cook on each day of your plan</p>
+            <p style={styles.text}>(Click the arrow next to each day to cycle through the days of your plan, and click the '+' sign at the bottom to add a new timebox to any day)</p>
 
             {planDays()}
             <Container style={styles.rowContainer}>
@@ -129,12 +129,6 @@ const styles = {
         'textAlign': 'center',
         'color': 'white'
     },
-    pNoBottom: {
-        'textAlign': 'center',
-        'color': 'black',
-        'margin': '0',
-        'fontWeight': 'bold'
-    },
     formContainer: {
         'display': 'flex',
         'flexDirection': 'column',
@@ -149,17 +143,5 @@ const styles = {
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'space-around',
-    },
-    iconButton: {
-        'color': 'black',
-        'textDecoration': 'none'
-    },
-    iconLeft: {
-        'margin': '10px',
-        'fontSize': '20px'
-    },
-    iconRight: {
-        'margin': '10px',
-        'fontSize': '20px'
-    },
+    }
 }
