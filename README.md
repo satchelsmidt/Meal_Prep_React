@@ -22,10 +22,10 @@ This is a fullstack redesign of my previous meal prep application, and is built 
   * FullCalendar.io
 * HTML
 * CSS
- * React Bootstrap
- * Flexbox
+  * React Bootstrap
+  * Flexbox
 * PostgreSQL
- * Sequelize ORM
+  * Sequelize ORM
 * Heroku
 
 ### Walkthrough
