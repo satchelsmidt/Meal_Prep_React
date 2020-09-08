@@ -12,7 +12,10 @@ This is a fullstack redesign of my previous meal prep application, and is built 
 
 When opening the app, the user will be able to login or create an account (email/password authentication).
 
-<login signup screens>
+#### Login Page 
+<img src="./meal-prep-react/assets/images/readme/login.png" width="250" height="250"/>
+
+![Login Page](./meal-prep-react/assets/images/readme/login.png)
 
 
 
