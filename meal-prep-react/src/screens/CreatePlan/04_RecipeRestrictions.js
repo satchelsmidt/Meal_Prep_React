@@ -7,14 +7,14 @@ import * as Restrictions from '../../config/restrictions.json'
 export default function RecipeRestrictions(props) {
 
     const renderDietsDropdown = () => {
-        return Restrictions.diets.map((diet) => {
-            return <Dropdown.Item onClick={() => selectDiets(diet)}>{diet}</Dropdown.Item>
+        return Restrictions.diets.map((diet, index) => {
+            return <Dropdown.Item key={index} onClick={() => selectDiets(diet)}>{diet}</Dropdown.Item>
         })
     }
 
     const renderIntolerancesDropdown = () => {
-        return Restrictions.intolerances.map((intolerance) => {
-            return <Dropdown.Item onClick={() => selectIntolerances(intolerance)}>{intolerance}</Dropdown.Item>
+        return Restrictions.intolerances.map((intolerance, index) => {
+            return <Dropdown.Item key={index} onClick={() => selectIntolerances(intolerance)}>{intolerance}</Dropdown.Item>
         })
     }
 
@@ -37,14 +37,14 @@ export default function RecipeRestrictions(props) {
     }
 
     const renderIntoleranceButtons = () => {
-        return props.intolerances.map((intolerance) => {
-            return <SmallButton text={`${intolerance}-free`}></SmallButton>
+        return props.intolerances.map((intolerance, index) => {
+            return <SmallButton key={index} text={`${intolerance}-free`}></SmallButton>
         })
     }
 
     const renderDietButtons = () => {
-        return props.diets.map((diet) => {
-            return <SmallButton text={diet}></SmallButton>
+        return props.diets.map((diet, index) => {
+            return <SmallButton key={index} text={diet}></SmallButton>
         })
     }
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Container } from 'react-bootstrap'
 import PlanStart from './01_PlanStart'
 import PlanTimes from './02_PlanTimes'
@@ -7,7 +7,7 @@ import RecipeRestrictions from './04_RecipeRestrictions'
 import moment from 'moment';
 import AddRecipes from './05_AddRecipes'
 import { createPlan, addPlanRecipes } from '../../api/plans'
-import { AuthContext } from '../../AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 import { addRecipes } from '../../api/recipes';
 import { useHistory } from "react-router-dom";
 
@@ -46,10 +46,7 @@ export default function CreatePlan() {
                 let newDate = moment(start).add(1, 'days')
                 start = newDate
 
-                //add to our plan times array as well (populate with empty time blocks)
-                // planTimesCopy.push([[new Date(start), new Date(start)]])
-
-                //goal is to push start dates to the time array to act as placeholders
+                //push start date of plan to the times array as placeholder
                 planTimesCopy.push([[startCopy, startCopy]])
             }
 
@@ -79,6 +76,7 @@ export default function CreatePlan() {
         }
 
         //TODO: Consolidate this data into object, change states to single object with these details in it
+        /* eslint-disable no-loop-func*/
         createPlan(auth.user, startDate, planDates, planTimesObject, planCuisines, planIntolerances, planDiets).then((res) => {
 
             console.log('plan created')
@@ -98,7 +96,6 @@ export default function CreatePlan() {
                 })
             }
         }).then(() => {
-            //TODO: include navigation to correct URL at this point
             history.push("/single_plan/" + planId);
         })
     }
@@ -193,17 +190,6 @@ export default function CreatePlan() {
         //modify state of restrictions arr
         await setPlanRecipes(recipesCopy)
     }
-
-    useEffect(() => {
-        console.log('beginning date of our plan (stored): ', startDate)
-        console.log('list of days for our plan (stored): ', planDates)
-        console.log('list of TIMES for our plan (stored): ', planTimes)
-        console.log('current step: ', step)
-        console.log('OUR CUISINES (MOST RECENT): ', planCuisines)
-        console.log('OUR Intoleranecs (MOST RECENT): ', planIntolerances)
-        console.log('OUR Diets (MOST RECENT): ', planDiets)
-        console.log('OUR RECIPES (by ID)): ', planRecipes)
-    })
 
     const formSteps = () => {
         switch (step) {

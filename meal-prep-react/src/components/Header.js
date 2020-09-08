@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Navbar, Nav, NavDropdown, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap';
-import { AuthContext } from '../AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import { logout } from '../api/authentication'
 
 export default function Header() {
@@ -32,7 +32,7 @@ export default function Header() {
                         <LinkContainer to="/all">
                             <Nav.Link>View All Plans</Nav.Link>
                         </LinkContainer >
-                        <Button variant="outline-primary" onClick={() => handleLogout()}>Logout</Button >
+                        <Button style = {styles.logoutButton} variant="outline-primary" onClick={() => handleLogout()}>Logout</Button >
                     </Nav>
                 </Navbar.Collapse>
             </Navbar >
@@ -60,7 +60,7 @@ export default function Header() {
                         <LinkContainer to="/signup">
                             <NavDropdown.Item>Sign Up</NavDropdown.Item>
                         </LinkContainer >
-                        <NavDropdown.Divider />
+                        {/* <NavDropdown.Divider /> */}
                         {/* TODO: implement feature to allow user to change password */}
                         {/* <LinkContainer to="/password">
                             <NavDropdown.Item>Forgot Password?</NavDropdown.Item>
@@ -72,9 +72,15 @@ export default function Header() {
     )
 }
 
+//TODO: Add in custom navbar coloring, #EDF5FC
+
 const styles = {
     navbar: {
-        'opacity': '.9',
-        'background': '#EDF5FC'
+        'position': 'relative',
+        'zIndex': '50'
+    },
+    logoutButton:{
+        'marginLeft': '10px'
     }
 }
+

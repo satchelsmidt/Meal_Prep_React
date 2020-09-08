@@ -3,7 +3,6 @@ import { axiosFoodInstance } from '../config/axios'
 const apiKey = process.env.REACT_APP_API_KEY
 
 export default function recipeSearch(cuisines, intolerances, diet, offset) {
-    console.log("CUISINES IN REQUEST: ", cuisines)
 
     //modify data before request
     let cuisinesString = cuisines.join(',')

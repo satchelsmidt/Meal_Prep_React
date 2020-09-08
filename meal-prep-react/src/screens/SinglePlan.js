@@ -43,13 +43,13 @@ export default function Plan() {
                 ingredients: []
             })
         })
-    }, [])
+    }, [planId])
 
     useEffect(() => {
         if (planData !== null) {
             createIngredientsList(planData.recipes)
         }
-    }, [planData])
+    })
 
     //Once fetched, return plan data
     if (dataLoaded && planData) {
@@ -148,7 +148,7 @@ const styles = {
     },
     innerCardContainer: {
         'display': 'flex',
-        'flex-wrap': 'wrap',
+        'flexWrap': 'wrap',
         'flexDirection': 'row',
         'justifyContent': 'space-around',
         'overflow': 'auto',
@@ -174,6 +174,6 @@ const styles = {
     },
     headerStyle: {
         'margin': '0px',
-        'text-align': 'center'
+        'textAlign': 'center'
     }
 }

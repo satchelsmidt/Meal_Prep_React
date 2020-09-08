@@ -1,5 +1,6 @@
 //This is required because apparently neither moment.js nor the native JS date object allow for the adding of variable amounts of days. Will reformat time input to be correct at a later date.
 
+/*eslint no-extend-native: ["error", { "exceptions": ["Date"] }]*/
 Date.prototype.addDays = function (days) {
     let date = new Date(this.valueOf());
     date.setDate(date.getDate() + days);
@@ -176,6 +177,8 @@ export const createEvents = (data, recipes) => {
                     }
                 }
                 break
+            default:
+                return
         }
     }
     return events

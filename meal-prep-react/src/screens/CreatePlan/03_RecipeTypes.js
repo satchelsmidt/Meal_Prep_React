@@ -12,14 +12,13 @@ export default function RecipeTypes(props) {
     }
 
     const renderCuisinesDropdown = () => {
-        return Cuisines.cuisines.map((cuisine) => {
-            return <Dropdown.Item onClick={() => selectCuisines(cuisine)}>{cuisine}</Dropdown.Item>
+        return Cuisines.cuisines.map((cuisine, index) => {
+            return <Dropdown.Item key={index} onClick={() => selectCuisines(cuisine)}>{cuisine}</Dropdown.Item>
         })
     }
 
     const selectCuisines = (cuisine) => {
         if (props.cuisines.indexOf(cuisine) < 0) {
-            console.log('CUISINE IN FUNCTION: ', cuisine)
             props.addNewCuisine(cuisine)
         }
         else {
@@ -28,15 +27,15 @@ export default function RecipeTypes(props) {
     }
 
     const renderCuisineButtons = () => {
-        return props.cuisines.map((cuisine) => {
-            return <SmallButton text={cuisine}></SmallButton>
+        return props.cuisines.map((cuisine, index) => {
+            return <SmallButton key={index} text={cuisine}></SmallButton>
         })
     }
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>First, lets pick the recipes you'd like to cook throughout the week.</p>
-            <p style={styles.p}>Select the types of cuisine you'd like to search:</p>
+            <p style={styles.p}>Now that we have the days and times for your plan figured out, let's look for some recipes</p>
+            <p style={styles.p}>First, choose the type(s) of cuisine you want to cook:</p>
             <Container style={styles.innerContainer}>
                 <Container style={styles.innerInnerContainer}>
                     <Dropdown >
