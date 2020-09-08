@@ -8,7 +8,23 @@ Users select a start date for their plan and input the timeslots they are availa
 
 This is a fullstack redesign of my previous meal prep application, and is built in React.js, with a Node.js backend and PostgreSQL database. The Spoonacular Recipe API is used for dynamic recipe searching.
 
+### Technology Used
+
+* JavaScript
+  * React.js
+  * Node.js
+  * Express.js
+  * Passport.js (authentication)
+  * Moment.js (date parsing)
+  * FullCalendar.io
+* HTML
+* CSS/React Bootstrap
+* PostgreSQL
+ * Sequelize ORM
+
 ### Walkthrough
+
+<br>
 
 When opening the app, the user will be able to login or create an account (email/password authentication).
 
@@ -26,35 +42,49 @@ When opening the app, the user will be able to login or create an account (email
 
 Once the user is authenticated, they will be taken to the main page for the app.
 
-<main page>
-
-
-
 When the user clicks the 'Create Plan' button, they will be taken into a multistep form for creating their meal plan. 
+
+#### Main Page
+![Main Page](./meal-prep-react/src/assets/images/readme/main.png)
+
+<br>
 
 The user first selects their plan start date
 
-<start date page>
+#### Plan Start Date
 
+![Start Date](./meal-prep-react/src/assets/images/readme/planstart.png)
 
+<br>
 
 Then the user selects the times they are available to cook each day
 
-<time select page>
+#### Plan Times
 
+![Plan Times](./meal-prep-react/src/assets/images/readme/plantimes_1.png)
 
+<br>
 
 The user then selects the cuisine preferences for their plan
 
-<cuisines page>
+#### Plan Cuisines
 
+![Plan Cuisines1](./meal-prep-react/src/assets/images/readme/cuisinesclosed.png)
+![Plan Cuisines2](./meal-prep-react/src/assets/images/readme/cuisinesopen.png)
+![Plan Cuisines3](./meal-prep-react/src/assets/images/readme/cuisinesselected.png)
 
+<br>
 
 The user then selects their dietary preferences and restrictions
 
-<preferences page>
+#### Plan Restrictions
 
+![Plan Restrictions1](./meal-prep-react/src/assets/images/readme/dietsclosed.png)
+![Plan Restrictions2](./meal-prep-react/src/assets/images/readme/dietsopen.png)
+![Plan Restrictions3](./meal-prep-react/src/assets/images/readme/dietsopen_2.png)
+![Plan Restrictions4](./meal-prep-react/src/assets/images/readme/dietsselected.png)
 
+<br>
 
 Once all details are input, the user will be taken to the page for their final meal plan
 
@@ -62,34 +92,7 @@ Once all details are input, the user will be taken to the page for their final m
 <final plan page (show each section)>
 
 
-
 The user can visit the 'View Plans' page to see a list of all their created plans so far, and can view each plan 'view plan'
 
 <view plans page>
-
-
-
-
-<br>
-<img src="/public/assets/images/signup.PNG" width="250" height="250"/>
-
-
-This is a gif highlighting the plan creation and display process:
-<br>
-<img src="/public/assets/images/walkthrough_1.gif" width="600" height="250"/>
-
-
-### Technology Used
-
-* JavaScript
-  * React.js
-  * Node.js
-  * Express.js
-  * Passport.js (authentication)
-  * Moment.js (date parsing)
-  * FullCalendar.io
-* HTML
-* CSS/React Bootstrap
-* PostgreSQL
- * Sequelize ORM
 
