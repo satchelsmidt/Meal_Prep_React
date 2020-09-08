@@ -12,12 +12,17 @@ This is a fullstack redesign of my previous meal prep application, and is built 
 
 When opening the app, the user will be able to login or create an account (email/password authentication).
 
-#### Login Page 
-<img src="./meal-prep-react/assets/images/readme/login.png" width="250" height="250"/>
+#### Login Page
+![Login Page](./meal-prep-react/src/assets/images/readme/login.png)
 
-![Login Page](./meal-prep-react/assets/images/readme/login.png)
+#### Signup Page
 
+![Signup Page](./meal-prep-react/src/assets/images/readme/signup.png)
 
+#### Account Menu
+![Account Menu](./meal-prep-react/src/assets/images/readme/authmenu.png)
+
+<br>
 
 Once the user is authenticated, they will be taken to the main page for the app.
 
