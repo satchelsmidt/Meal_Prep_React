@@ -8,19 +8,25 @@ Users select a start date for their plan and input the timeslots they are availa
 
 This is a fullstack redesign of my previous meal prep application, and is built in React.js, with a Node.js backend and PostgreSQL database. The Spoonacular Recipe API is used for dynamic recipe searching.
 
+[Link to deployed app](https://polar-basin-68400.herokuapp.com/)
+
 ### Technology Used
 
 * JavaScript
   * React.js
   * Node.js
   * Express.js
+  * Axios (API config)
   * Passport.js (authentication)
   * Moment.js (date parsing)
   * FullCalendar.io
 * HTML
-* CSS/React Bootstrap
+* CSS
+ * React Bootstrap
+ * Flexbox
 * PostgreSQL
  * Sequelize ORM
+* Heroku
 
 ### Walkthrough
 
