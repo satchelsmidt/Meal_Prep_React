@@ -1,29 +1,25 @@
-import React, {useContext, useEffect} from 'react';
+import React from 'react';
 import { Container } from 'react-bootstrap'
 import BigButton from '../components/BigButton'
 import { NavLink } from 'react-router-dom'
-import { AuthContext } from '../AuthContext'
-
 
 export default function Main() {
-
-    const auth = useContext(AuthContext)
-
-    useEffect(()=>{
-        console.log('this is our current user: ', auth.user)
-    }, [auth.user])
-
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>Hello, welcome to Prepper. This tool will let you select the recipes that you'd like to cook throughout the week, and generate a  prep plan for you based on your availablity each day.</p>
-            <p style={styles.p}>Click 'Create Plan' to start creating your perfect meal plan.</p>
+            <h5 style={styles.text}>Welcome to Preppy!</h5>
+
+            <p style={styles.text}>Prepping your meals ahead of time is a great way to eat healthier, save money, and organize your time -- but getting started can be tricky.</p>
+
+            <p style={styles.text}> This tool will help you create a weeklong meal plan that fits <strong>your</strong> schedule, with recipes that work with your dietary needs and preferences.</p>
+
+            <p style={styles.text}>Click 'Create Plan' to get started!</p>
             <NavLink to="/create"><BigButton text="Create Plan"></BigButton></NavLink>
         </Container>
     );
 }
 
 const styles = {
-    p: {
+    text: {
         'textAlign': 'center',
         'color': 'white'
     },
@@ -32,6 +28,8 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px'
+        'width': '60%',
+        'margin': '75px',
+        'padding': '20px'
     }
 }

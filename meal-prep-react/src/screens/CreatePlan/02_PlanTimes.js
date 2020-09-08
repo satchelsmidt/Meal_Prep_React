@@ -112,17 +112,20 @@ export default function PlanTimes(props) {
 
     return (
         <Container style={styles.formContainer}>
-            <p style={styles.p}>Select the times you are available to cook for each day of your plan:</p>
+            <p style={styles.text}>Now select the times you are available to cook on each day of your plan</p>
+            <p style={styles.text}>(Click the arrow next to the date to cycle through the days of your plan)</p>
 
             {planDays()}
-            <SmallButton text="Back" onClick={() => { props.prevStep() }}></SmallButton>
-            <SmallButton text="Next" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
+            <Container style={styles.rowContainer}>
+                <SmallButton text="Previous Step" onClick={() => { props.prevStep() }}></SmallButton>
+                <SmallButton text="Next Step" onClick={(e) => { saveAndSubmit(e) }}></SmallButton>
+            </Container>
         </Container>
     );
 }
 
 const styles = {
-    p: {
+    text: {
         'textAlign': 'center',
         'color': 'white'
     },
@@ -137,7 +140,15 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px'
+        'width': '60%',
+        'margin': '75px',
+        'padding': '20px'
+    },
+    rowContainer: {
+        'display': 'flex',
+        'flexDirection': 'row',
+        'alignItems': 'center',
+        'justifyContent': 'space-around',
     },
     iconButton: {
         'color': 'black',

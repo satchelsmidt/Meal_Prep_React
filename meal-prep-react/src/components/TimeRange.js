@@ -26,6 +26,17 @@ export default function TimeRange(props) {
     return (
         <Container style={styles.timeContainer}>
             <DatePicker
+                popperPlacement="bottom" popperModifiers={{
+                    flip: {
+                        behavior: ["bottom"]
+                    },
+                    preventOverflow: {
+                        enabled: false
+                    },
+                    hide: {
+                        enabled: false
+                    }
+                }}
                 selected={startTime}
                 onChange={date => changeStartTime(date)}
                 showTimeSelect
@@ -34,8 +45,19 @@ export default function TimeRange(props) {
                 timeCaption="Time"
                 dateFormat="h:mm aa"
             />
-            <h5 style={{ 'color': 'black', 'margin': '10px' }}>to</h5>
+            <h5 style={styles.timeText}>to</h5>
             <DatePicker
+                popperPlacement="bottom" popperModifiers={{
+                    flip: {
+                        behavior: ["bottom"]
+                    },
+                    preventOverflow: {
+                        enabled: false
+                    },
+                    hide: {
+                        enabled: false
+                    }
+                }}
                 selected={endTime}
                 onChange={date => changeEndTime(date)}
                 showTimeSelect
@@ -55,4 +77,8 @@ const styles = {
         'alignItems': 'center',
         'justifyContent': 'center',
     },
+    timeText: {
+        'color': 'white',
+        'margin': '10px'
+    }
 }

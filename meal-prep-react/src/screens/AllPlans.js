@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { Container } from 'react-bootstrap'
 import { findAllUserPlans } from '../api/plans'
-import { AuthContext } from '../AuthContext'
+import { AuthContext } from '../context/AuthContext'
 import { NavLink } from 'react-router-dom'
 
 
@@ -12,7 +12,6 @@ export default function AllPlans() {
 
     useEffect(() => {
         findAllUserPlans(auth.user).then((res) => {
-            console.log('response from all plans search: ', res)
             if (res.data.length === 0) {
                 setPlans(false)
             }
@@ -20,7 +19,7 @@ export default function AllPlans() {
                 setPlans(res.data)
             }
         })
-    }, [])
+    }, [auth.user])
 
     //if plan data is still fetching
     if (plans === null) {
@@ -42,7 +41,7 @@ export default function AllPlans() {
     return (
         <Container style={styles.formContainer}>
             <p style={styles.p}>Here is where you can view all plans you have created</p>
-            {plans.map((plan, index) => { return <NavLink to={'/single_plan/' + plan.id}><p key={index}>View Details for plan {plan.id}, from {JSON.parse(plan.planDates)[0]} to {JSON.parse(plan.planDates)[6]}</p></NavLink> })}
+            {plans.map((plan, index) => { return <NavLink key={index}to={'/single_plan/' + plan.id}><p key={index}>View Details for plan {plan.id}, from {JSON.parse(plan.planDates)[0]} to {JSON.parse(plan.planDates)[6]}</p></NavLink> })}
         </Container>
     );
 }

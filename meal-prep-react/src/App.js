@@ -11,8 +11,8 @@ import Signup from './screens/Auth/Signup'
 import Password from './screens/Auth/ForgotPassword'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { checkSession } from './api/authentication'
-import { AuthContext } from './AuthContext'
-import { PrivateRoute } from './PrivateRoute'
+import { AuthContext } from './context/AuthContext'
+import { PrivateRoute } from './components/PrivateRoute'
 
 export default function App() {
 
@@ -27,10 +27,8 @@ export default function App() {
       checkSession().then((res) => {
         console.log('Response from session check: ', res)
 
-        //if our session check returns false for isAuthenticated, log out user
         if (!res.success) {
-          console.log('user not logged in, logging out')
-          // setLoggedIn(false)
+          console.log('No user logged in')
         }
         //otherwise, log them in and redirect to home page
         else {
@@ -43,8 +41,6 @@ export default function App() {
   }, [loggedIn])
 
   const handleLogin = async (res) => {
-    console.log('this is the login handler: ')
-    console.log(res)
     setUser(res.data)
     await setLoggedIn(res.success)
   }
@@ -52,24 +48,42 @@ export default function App() {
   return (
     <AuthContext.Provider value={{ loggedIn: loggedIn, user: user, handleLogin: handleLogin }}>
       <BrowserRouter>
-        <Container>
+        <Container style={styles.appContainer}>
           <Header></Header>
-          <Switch>
-            {/* PROTECTED  ROUTES*/}
-            <PrivateRoute exact path='/' component={Main} />
-            <PrivateRoute path='/all' component={AllPlans} />
-            <PrivateRoute path='/create' component={CreatePlan} />
-            <PrivateRoute path='/single_plan/:planId' component={SinglePlan} />
+          <Container style={styles.contentContainer}>
+            <Switch>
+              {/* PROTECTED  ROUTES*/}
+              <PrivateRoute exact path='/' component={Main} />
+              <PrivateRoute path='/all' component={AllPlans} />
+              <PrivateRoute path='/create' component={CreatePlan} />
+              <PrivateRoute path='/single_plan/:planId' component={SinglePlan} />
 
-            {/* PUBLIC ROUTES*/}
-            <Route exact path='/login' component={Login} />
-            <Route exact path='/signup' component={Signup} />
-            <Route path='/password' component={Password} />
-            <Route path='/sample' component={SamplePlan} />
-          </Switch>
+              {/* PUBLIC ROUTES*/}
+              <Route exact path='/login' component={Login} />
+              <Route exact path='/signup' component={Signup} />
+              <Route path='/password' component={Password} />
+              <Route path='/sample' component={SamplePlan} />
+            </Switch>
+          </Container>
         </Container>
       </BrowserRouter>
     </AuthContext.Provider>
   );
+}
+const styles = {
+  appContainer:{
+    'height': '100%'
+  },
+  contentContainer: {
+    'display': 'flex',
+    'flexDirection': 'column',
+    'alignItems': 'center',
+    'background': '#5D737E',
+    'opacity': '.90',
+    'padding': '20px 10px',
+    // 'height': 'auto',
+    'position': 'relative',
+    'minHeight': '100%'
+  },
 }
 

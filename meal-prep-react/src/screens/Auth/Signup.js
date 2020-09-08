@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { signup } from '../../api/authentication'
 import { Redirect } from 'react-router-dom';
-import { AuthContext } from '../../AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Signup(props) {
 
@@ -44,15 +44,16 @@ export default function Signup(props) {
         return <Redirect to={from} />;
     }
 
-    if(auth.loggedIn){
+    if (auth.loggedIn) {
         return <Redirect to='/' />;
     }
 
     return (
         <Container className="Signup" style={styles.formContainer}>
+            <h3 style={styles.headerStyle}>Signup</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="email" bssize="large">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={styles.text}>Email</Form.Label>
                     <Form.Control
                         autoFocus
                         type="email"
@@ -61,13 +62,13 @@ export default function Signup(props) {
                     />
                 </Form.Group>
                 <Form.Group bssize="large">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label style={styles.text}>Password</Form.Label>
                     <Form.Control
                         value={password}
                         onChange={e => setPassword(e.target.value)}
                         type="password"
                     />
-                    <Form.Label>Re-enter password</Form.Label>
+                    <Form.Label style={styles.text}>Re-enter password</Form.Label>
                     <Form.Control
                         value={passwordValid}
                         onChange={e => setPasswordValid(e.target.value)}
@@ -83,8 +84,7 @@ export default function Signup(props) {
 }
 
 const styles = {
-    p: {
-        'textAlign': 'center',
+    text: {
         'color': 'white'
     },
     formContainer: {
@@ -92,6 +92,10 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px'
+        'margin': '75px'
+    },
+    headerStyle: {
+        'color': 'white',
+        'padding': '10px'
     }
 }

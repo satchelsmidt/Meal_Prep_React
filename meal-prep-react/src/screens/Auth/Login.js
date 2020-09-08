@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { Button, Form, Container } from "react-bootstrap";
 import { Redirect } from 'react-router-dom';
 import { login } from '../../api/authentication'
-import { AuthContext } from '../../AuthContext'
+import { AuthContext } from '../../context/AuthContext'
 
 export default function Login(props) {
 
@@ -37,15 +37,16 @@ export default function Login(props) {
         return <Redirect to={from} />;
     }
 
-    if(auth.loggedIn){
+    if (auth.loggedIn) {
         return <Redirect to='/' />;
     }
 
     return (
         <Container className="Login" style={styles.formContainer}>
+            <h3 style={styles.headerStyle}>Login</h3>
             <Form onSubmit={handleSubmit}>
                 <Form.Group controlId="email" bssize="large">
-                    <Form.Label>Email</Form.Label>
+                    <Form.Label style={styles.text}>Email</Form.Label>
                     <Form.Control
                         autoFocus
                         type="email"
@@ -54,7 +55,7 @@ export default function Login(props) {
                     />
                 </Form.Group>
                 <Form.Group controlId="password" bssize="large">
-                    <Form.Label>Password</Form.Label>
+                    <Form.Label style={styles.text}>Password</Form.Label>
                     <Form.Control
                         value={password}
                         onChange={e => setPassword(e.target.value)}
@@ -63,15 +64,14 @@ export default function Login(props) {
                 </Form.Group>
                 <Button block bssize="large" disabled={!validateForm()} type="submit">
                     Login
-                    </Button>
+                </Button>
             </Form>
         </Container>
     );
 }
 
 const styles = {
-    p: {
-        'textAlign': 'center',
+    text: {
         'color': 'white'
     },
     formContainer: {
@@ -79,6 +79,10 @@ const styles = {
         'flexDirection': 'column',
         'alignItems': 'center',
         'justifyContent': 'center',
-        'height': '400px'
+        'margin': '75px'
+    },
+    headerStyle: {
+        'color': 'white',
+        'padding': '10px'
     }
 }

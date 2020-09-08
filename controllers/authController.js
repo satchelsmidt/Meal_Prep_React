@@ -24,14 +24,13 @@ exports.allUsers = (req, res) => {
 
 //logic to check if we have an existing valid session
 exports.session = (req, res) => {
-    console.log('current user: ', req.user)
     console.log(`is current user authenticated? ${req.isAuthenticated()}`)
     if (req.isAuthenticated()) {
-        console.log('We have a valid session')
+        console.log('Valid session')
         res.json(req.user.id)
     }
     else {
-        return res.status(400).send('No valid session')
+        return res.status(401).send('No valid session')
     }
 }
 
@@ -42,7 +41,6 @@ exports.logout = (req, res, next) => {
         req.logout()
         req.session.destroy(function (err) {
             if (err) { return next(err); }
-            // The response should indicate that the user is no longer authenticated.
             return res.send({ authenticated: req.isAuthenticated() });
         });
     }

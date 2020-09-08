@@ -18,7 +18,7 @@ export default function SmallButton(props) {
 
 const styles ={
     createButton: {
-        'width': '15%',
+        'width': '25%',
         'margin': '15px'
     }
 }

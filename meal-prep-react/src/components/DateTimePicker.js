@@ -14,13 +14,13 @@ export default function DateTimePicker(props) {
     }
 
     const mapTimes = currentTimeBlocks.map((value, timeIndex) => {
-        return (<TimeRange startTime={currentTimeBlocks[timeIndex][0]} endTime={currentTimeBlocks[timeIndex][1]} dayIndex={props.step} timeIndex={timeIndex} planTimes={props.planTimes}
+        return (<TimeRange key={timeIndex} startTime={currentTimeBlocks[timeIndex][0]} endTime={currentTimeBlocks[timeIndex][1]} dayIndex={props.step} timeIndex={timeIndex} planTimes={props.planTimes}
             updateTimeBoxes={props.updateTimeBoxes}
         />)
     })
 
     return (
-        <Container style={styles.formContainer}>
+        <Container style={styles.formContainer} >
             <Container style={styles.topContainer}>
                 {props.step === 0 ? (
                     <Button style={styles.iconButton} variant="link">
@@ -32,7 +32,7 @@ export default function DateTimePicker(props) {
                             <ArrowLeftSquareFill style={styles.iconLeft} onClick={props.prevDayStep} />
                         </Button>
                     )}
-                <p style={styles.pNoBottom}>{moment(props.date).format('dddd,  LL')}</p>
+                <p style={styles.timeText}>{moment(props.date).format('dddd,  LL')}</p>
                 {props.step === 6 ? (
                     <Button style={styles.iconButton} variant="link">
                         <ArrowRightSquareFill style={{ opacity: 0 }} />
@@ -53,9 +53,9 @@ export default function DateTimePicker(props) {
 }
 
 const styles = {
-    pNoBottom: {
+    timeText: {
         'textAlign': 'center',
-        'color': 'black',
+        'color': 'white',
         'margin': '0',
         'fontWeight': 'bold'
     },
@@ -66,7 +66,7 @@ const styles = {
         'justifyContent': 'center',
     },
     iconButton: {
-        'color': 'black',
+        'color': 'white',
         'textDecoration': 'none',
     },
     iconLeft: {

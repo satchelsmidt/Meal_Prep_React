@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Container, Card, Button } from 'react-bootstrap'
 import recipeSearch from '../../api/recipeSearch'
 import SmallButton from '../../components/SmallButton'
+import BigButton from '../../components/BigButton'
 
 export default function AddRecipes(props) {
 
@@ -36,7 +37,6 @@ export default function AddRecipes(props) {
     }
 
     const selectRecipe = (e) => {
-        console.log('our recipe details: ', e.target.getAttribute('recipedetails'))
         props.addNewRecipe(JSON.parse(e.target.getAttribute('recipedetails')))
 
         e.target.setAttribute("disabled", true)
@@ -50,10 +50,9 @@ export default function AddRecipes(props) {
 
     useEffect(() => {
         recipeSearch(props.cuisines, props.intolerances, props.diets, currentOffset).then((res) => {
-            console.log('results from search: ', res.data.results)
             setRecipeData(res.data.results)
         })
-    }, [page])
+    }, [page, currentOffset, props.cuisines, props.diets, props.intolerances])
 
     return (
         <Container style={styles.formContainer}>
@@ -67,7 +66,7 @@ export default function AddRecipes(props) {
                 {currentOffset > 0 && <SmallButton text="Previous" onClick={(e) => { renderPrevPage(e) }} />}
                 <SmallButton text="Next" onClick={(e) => { renderNewPage(e) }}></SmallButton>
             </Container>
-            <SmallButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></SmallButton>
+            <BigButton text="Finalize Plan" onClick={() => { props.handleFormSubmit() }}></BigButton>
         </Container>
     );
 }
@@ -88,7 +87,7 @@ const styles = {
     },
     cardContainer: {
         'display': 'flex',
-        'flex-wrap': 'wrap',
+        'flexWrap': 'wrap',
         'flexDirection': 'row',
         'alignItems': 'center',
         'justifyContent': 'space-between',
