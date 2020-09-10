@@ -1,6 +1,6 @@
 import { axiosFoodInstance } from '../config/axios'
 
-const apiKey = process.env.REACT_APP_API_KEY
+const apiKey = `${process.env.REACT_APP_API_KEY}`
 
 export default function recipeSearch(cuisines, intolerances, diet, offset) {
 
