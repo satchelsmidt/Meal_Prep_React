@@ -19,12 +19,12 @@ const db = require("./models");
 
 let corsOptions
 
+db.sequelize.sync({ force: true }).then(() => {
+  console.log('dropped and synced db')
+});
+
 //CORS and DB setup for dev env
 if (process.env.NODE_ENV !== 'production') {
-  db.sequelize.sync({ force: true }).then(() => {
-    console.log('dropped and synced db')
-  });
-
   const domains = ["http://localhost:3000", "http://localhost:8080"]
 
   corsOptions = {
