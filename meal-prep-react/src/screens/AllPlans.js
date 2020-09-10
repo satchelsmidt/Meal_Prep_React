@@ -3,6 +3,7 @@ import { Container } from 'react-bootstrap'
 import { findAllUserPlans } from '../api/plans'
 import { AuthContext } from '../context/AuthContext'
 import { NavLink } from 'react-router-dom'
+import moment from 'moment'
 
 export default function AllPlans() {
 
@@ -42,7 +43,7 @@ export default function AllPlans() {
             <p style={styles.text}>Here are all plans you have created! </p>
             <p style={styles.text}>Click on any plan to view its calendar page.</p>
             <Container style={styles.plansContainer}>
-                {plans.map((plan, index) => { return <NavLink key={index} to={'/single_plan/' + plan.id} style={styles.linkStyle}><p key={index}>Details for Plan {plan.id}, from {JSON.parse(plan.planDates)[0]} to {JSON.parse(plan.planDates)[6]}</p></NavLink> })}
+                {plans.map((plan, index) => { return <NavLink key={index} to={'/single_plan/' + plan.id} style={styles.linkStyle}><p key={index}>View plan from {moment(JSON.parse(plan.planDates)[0]).format("dddd, MMMM Do")} to {moment(JSON.parse(plan.planDates)[6]).format("dddd, MMMM Do")}</p></NavLink> })}
             </Container>
         </Container>
     );

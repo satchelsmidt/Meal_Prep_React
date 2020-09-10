@@ -55,7 +55,7 @@ export default function Plan() {
     if (dataLoaded && planData) {
         return (
             <Container style={styles.formContainer}>
-                <h2 style={styles.planHeader}>Meal Plan #{planData.id}</h2>
+                <h2 style={styles.planHeader}>Meal Plan</h2>
                 {/* If user has selected times for plan, display calender */}
                 {createEvents(planData.planTimes, planData.recipes).length > 0 ? (
                     <Container style={styles.calendarContainer}>
