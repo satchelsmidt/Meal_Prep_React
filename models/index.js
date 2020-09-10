@@ -10,6 +10,7 @@ let sequelize;
 if (dbConfig.use_env_variable) {
     console.log('USING THE ENV VARIABLE AHHH THIS SHOULD BE HERE')
     console.log('USING THE ENV VARIABLE AHHH THIS SHOULD BE HERE also lets check this out for good measure, env: ', env)
+    console.log('this shit right here should equal our url katy or something: ', process.env[dbConfig.use_env_variable])
     sequelize = new Sequelize(process.env[dbConfig.use_env_variable], dbConfig);
 } else {
     sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
