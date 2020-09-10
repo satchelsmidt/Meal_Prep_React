@@ -4,6 +4,8 @@ const apiKey = process.env.REACT_APP_API_KEY
 
 export default function recipeSearch(cuisines, intolerances, diet, offset) {
 
+    console.log('THIS IS OUR API KEY IT SHOULD NOT BE HIDDEN: ', apiKey)
+
     //modify data before request
     let cuisinesString = cuisines.join(',')
     let intolerancesString = intolerances.join(',')
@@ -15,7 +17,7 @@ export default function recipeSearch(cuisines, intolerances, diet, offset) {
             cuisine: cuisinesString,
             intolerances: intolerancesString,
             diet: dietString,
-            number: 6,
+            number: 3,
             offset: offset,
             sort: "popularity",
             addRecipeInformation: true,
