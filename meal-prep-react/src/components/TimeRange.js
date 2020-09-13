@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container } from 'react-bootstrap'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
+import moment from 'moment'
 
 export default function TimeRange(props) {
 
@@ -11,6 +12,11 @@ export default function TimeRange(props) {
     const changeStartTime = (date) => {
         props.updateTimeBoxes(props.dayIndex, props.timeIndex, date, 0)
         setStartTime(date)
+
+        //If start time set, auto set end time to 1 hour later
+        let datePlusOneHour = new Date(moment(date).add(1, 'hours').format())
+        props.updateTimeBoxes(props.dayIndex, props.timeIndex, datePlusOneHour, 1)
+
     }
 
     const changeEndTime = (date) => {

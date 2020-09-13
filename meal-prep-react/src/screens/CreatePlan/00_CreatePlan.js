@@ -25,12 +25,19 @@ export default function CreatePlan() {
     const auth = useContext(AuthContext)
     const history = useHistory();
 
+    //Logic for handling 15 min rounding of dates
+    const roundedUp = Math.ceil(moment().minute() / 15) * 15;
+
     const nextStep = () => {
         //if we are submitting first step, populate planDates with 7 day range starting from selected start date
         if (step === 1) {
 
             //make copy of startDate state
             let startCopy = startDate
+
+            //round our default times
+            let roundedStartTime = new Date(moment(startCopy).minute(roundedUp).second(0).format())
+            // let roundedStartTimeEnd = new Date(moment(startCopy).minute(roundedUp).second(0).add(1, 'hours').format())
 
             //initialize start and end of plan
             let start = moment(startDate, 'YYYY-MM-DD')
@@ -46,8 +53,10 @@ export default function CreatePlan() {
                 let newDate = moment(start).add(1, 'days')
                 start = newDate
 
-                //push start date of plan to the times array as placeholder
-                planTimesCopy.push([[startCopy, startCopy]])
+                //push start date of plan (rounded) to the times array as placeholder
+                // planTimesCopy.push([[startCopy, startCopy]])
+                // planTimesCopy.push([[roundedStartTime, roundedStartTimeEnd]])
+                planTimesCopy.push([[roundedStartTime, roundedStartTime]])
             }
 
             //set state of plan dates to our new arr
@@ -117,11 +126,17 @@ export default function CreatePlan() {
         let timesCopy = [...planTimes]
         //shallow copy of startDate
         let startCopy = startDate
+
+        //round our default times
+        let roundedStartTime = new Date(moment(startCopy).minute(roundedUp).second(0).format())
+        // let roundedStartTimeEnd = new Date(moment(startCopy).minute(roundedUp).second(0).add(1, 'hours').format())
+
         //shallow copy of item to mutate
         let time = timesCopy[dayStep]
 
         //add default value
-        time.push([startCopy, startCopy])
+        // time.push([roundedStartTime, roundedStartTimeEnd])
+        time.push([roundedStartTime, roundedStartTime])
 
         //put timeslot back into original array
         timesCopy[dayStep] = time

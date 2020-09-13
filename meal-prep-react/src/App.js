@@ -13,6 +13,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import { checkSession } from './api/authentication'
 import { AuthContext } from './context/AuthContext'
 import { PrivateRoute } from './components/PrivateRoute'
+import Footer from './components/Footer'
 
 export default function App() {
 
@@ -65,13 +66,14 @@ export default function App() {
               <Route path='/sample' component={SamplePlan} />
             </Switch>
           </Container>
+          <Footer></Footer>
         </Container>
       </BrowserRouter>
     </AuthContext.Provider>
   );
 }
 const styles = {
-  appContainer:{
+  appContainer: {
     'height': '100%'
   },
   contentContainer: {
