@@ -30,6 +30,8 @@ export const createEvents = (data, recipes) => {
                         let startTime = copyStart
                         let endTime = copyEnd
 
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         //TODO: add logic to place events more accurately
                         //required logic: 
                         //find diff between start and end of timeslot. 
@@ -44,10 +46,11 @@ export const createEvents = (data, recipes) => {
 
                         // console.log('this is the total time of first slot: ', totalTime)
                         // console.log('this is the total cook time of first recipe: ', recipeTimes.shift())
+                        // console.log('our current recipes: ', recipeTitles)
+                        // console.log('recipes title length: ', recipeTitles.length)
 
                         let event = {
-                            title: 'Time to cook: ' + recipeTitles.shift() || 'No recipe for this time slot',
-                            description: 'Time to cook ' + recipeTitles.shift() || 'No recipe for this time slot',
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -67,11 +70,15 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+                        
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
+
                         events.push(event)
                     }
                 }
@@ -87,8 +94,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -107,8 +117,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -127,8 +140,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -147,8 +163,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -167,8 +186,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
@@ -187,8 +209,11 @@ export const createEvents = (data, recipes) => {
 
                         let startTime = copyStart
                         let endTime = copyEnd
+
+                        let currentRecipe = recipeTitles.length > 0 ?  recipeTitles.pop() : 'No recipe for this time slot';
+
                         let event = {
-                            title: recipeTitles.shift(),
+                            title: currentRecipe,
                             start: startTime,
                             end: endTime
                         }
